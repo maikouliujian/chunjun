@@ -534,6 +534,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
      * @param jobGraph A job graph which is deployed with the Flink cluster, {@code null} if none
      * @param detached True if the cluster should be started in detached mode
      */
+    //todo 提交任务核心类！！！！！！
     private ClusterClientProvider<ApplicationId> deployInternal(
             ClusterSpecification clusterSpecification,
             String applicationName,
@@ -584,7 +585,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
         Resource maxRes = appResponse.getMaximumResourceCapability();
 
         // create flink job graph
-
+        //todo 创建job graph
         if (clusterSpecification.isCreateProgramDelay()) {
             List<URL> tempFile = new ArrayList<>();
             for (File file : shipFiles) {
@@ -594,6 +595,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
 
             PackagedProgram program = JobGraphUtil.buildProgram(clusterSpecification);
             clusterSpecification.setProgram(program);
+            //todo
             jobGraph =
                     PackagedProgramUtils.createJobGraph(
                             program,
@@ -614,6 +616,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
                 shipFiles.addAll(fileList);
                 jobGraph.getUserArtifacts().clear();
             }
+            //todo 设置jobgraph
             clusterSpecification.setJobGraph(jobGraph);
         }
 

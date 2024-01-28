@@ -24,7 +24,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.LinkedList;
-
+//todo jobconfig
 @Data
 public class JobConfig implements Serializable {
 
@@ -33,11 +33,11 @@ public class JobConfig implements Serializable {
     private LinkedList<ContentConfig> content;
 
     private SettingConfig setting = new SettingConfig();
-
+    //todo reader
     public OperatorConfig getReader() {
         return content.get(0).getReader();
     }
-
+    //todo writer
     public OperatorConfig getWriter() {
         return content.get(0).getWriter();
     }
@@ -49,7 +49,7 @@ public class JobConfig implements Serializable {
     public MappingConfig getNameMapping() {
         return content.get(0).getNameMapping();
     }
-
+    //todo transformer
     public TransformerConfig getTransformer() {
         return content.get(0).getTransformer();
     }

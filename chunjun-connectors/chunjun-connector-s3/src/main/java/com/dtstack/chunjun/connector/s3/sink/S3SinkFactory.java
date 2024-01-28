@@ -34,7 +34,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSink;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.types.logical.RowType;
-
+//todo S3SinkFactory
 public class S3SinkFactory extends SinkFactory {
 
     private final S3Config s3Config;

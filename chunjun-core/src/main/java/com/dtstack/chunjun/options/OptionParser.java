@@ -40,7 +40,7 @@ public class OptionParser {
     protected static final String OPTION_JOB = "job";
 
     private final Options properties = new Options();
-
+    //todo 给properties赋值
     public OptionParser(String[] args) {
         Class<?> cla = properties.getClass();
         Field[] fields = cla.getDeclaredFields();
@@ -88,6 +88,7 @@ public class OptionParser {
             if (value == null) {
                 continue;
             } else if (OPTION_JOB.equalsIgnoreCase(key)) {
+                //todo 解析-job配置
                 String jobValue = readFile(value.toString());
 
                 args.add("-" + key);

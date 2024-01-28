@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.List;
 
 /** Description of the cluster to start by the {@link ClusterDescriptor}. */
+//todo ClusterSpecification
 public final class ClusterSpecification {
     private final int masterMemoryMB;
     private final int taskManagerMemoryMB;
@@ -43,8 +44,10 @@ public final class ClusterSpecification {
     private JobGraph jobGraph;
     private SavepointRestoreSettings spSetting = SavepointRestoreSettings.none();
     private List<URL> classpaths;
+    //todo 指定flink job mainclass
     private String entryPointClass;
     private String[] programArgs;
+    //todo 指定flink job jar
     private File jarFile;
     private boolean createProgramDelay = false;
     private PackagedProgram program;

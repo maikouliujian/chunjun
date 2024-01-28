@@ -215,6 +215,7 @@ public class PluginUtil {
                 pluginClassName = appendMetricClass(pluginName);
                 break;
             case source:
+                //todo xxxxreader--->xxxxsource
                 String sourceName = pluginName.replace(READER_SUFFIX, SOURCE_SUFFIX);
                 pluginClassName = camelize(sourceName, SOURCE_SUFFIX);
                 break;
@@ -271,6 +272,7 @@ public class PluginUtil {
      * @param suffix 插件类型前缀，如：source、sink
      * @return 插件包类全限定名，如：com.dtstack.chunjun.connector.binlog.source.BinlogSourceFactory
      */
+    //todo xxxxsource--->com.dtstack.chunjun.connector.binlog.source.xxxxSourceFactory
     protected static String camelize(String pluginName, String suffix) {
         int pos = pluginName.indexOf(suffix);
         String left = pluginName.substring(0, pos);

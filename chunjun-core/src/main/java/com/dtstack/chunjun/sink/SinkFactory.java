@@ -61,7 +61,7 @@ public abstract class SinkFactory implements RawTypeConvertible {
      * @return write data flow
      */
     public abstract DataStreamSink<RowData> createSink(DataStream<RowData> dataSet);
-
+    //todo sink DataStream
     protected DataStreamSink<RowData> createOutput(
             DataStream<RowData> dataSet, OutputFormat<RowData> outputFormat, String sinkName) {
         Preconditions.checkNotNull(dataSet);

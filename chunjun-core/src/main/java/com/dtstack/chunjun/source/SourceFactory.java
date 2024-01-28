@@ -114,6 +114,7 @@ public abstract class SourceFactory implements RawTypeConvertible {
         Preconditions.checkNotNull(inputFormat);
         DtInputFormatSourceFunction<RowData> function =
                 new DtInputFormatSourceFunction<>(inputFormat, getTypeInformation());
+        //todo 获取source DataStream
         return env.addSource(function, sourceName, getTypeInformation());
     }
 

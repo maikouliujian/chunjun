@@ -50,7 +50,7 @@ if [ $CHUNJUN_DEPLOY_MODE -eq 1 ]; then
 else
   JAR_DIR=$CHUNJUN_HOME/../lib/chunjun-clients.jar:$CHUNJUN_HOME/../lib/*
 fi
-
+# todo main class
 CLASS_NAME=com.dtstack.chunjun.client.Launcher
 
 JOBTYPE="sync"

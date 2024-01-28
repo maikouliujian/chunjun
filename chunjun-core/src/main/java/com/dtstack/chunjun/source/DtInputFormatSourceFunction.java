@@ -58,7 +58,7 @@ public class DtInputFormatSourceFunction<OUT> extends InputFormatSourceFunction<
 
     private final TypeInformation<OUT> typeInfo;
     private transient TypeSerializer<OUT> serializer;
-
+    //todo
     private final InputFormat<OUT, InputSplit> format;
 
     private transient InputSplitProvider provider;
@@ -95,9 +95,11 @@ public class DtInputFormatSourceFunction<OUT> extends InputFormatSourceFunction<
         }
 
         format.configure(parameters);
-
+        //todo 获取InputSplitProvider
         provider = context.getInputSplitProvider();
+        //todo typeInfo的序列化器
         serializer = typeInfo.createSerializer(getRuntimeContext().getExecutionConfig());
+        //todo splitIterator读取数据
         splitIterator = getInputSplits();
         isRunning = splitIterator.hasNext();
     }

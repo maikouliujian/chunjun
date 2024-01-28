@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public class PluginInfoUtil {
-
+    //todo flink job启动类
     private static final String MAIN_CLASS = "com.dtstack.chunjun.Main";
     private static final String CORE_JAR_NAME_PREFIX = "chunjun";
 

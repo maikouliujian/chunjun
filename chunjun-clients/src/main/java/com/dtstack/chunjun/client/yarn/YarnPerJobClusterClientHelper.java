@@ -86,8 +86,10 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper<Applic
         try (YarnClusterDescriptor descriptor =
                 createPerJobClusterDescriptor(launcherOptions, flinkConfig)) {
             ClusterClientProvider<ApplicationId> provider =
+                    //todo 提交任务
                     descriptor.deployJobCluster(
                             clusterSpecification, new JobGraph("chunjun"), true);
+            //todo 返回clusterid(appid) 和 jobid
             String applicationId = provider.getClusterClient().getClusterId().toString();
             String flinkJobId = clusterSpecification.getJobGraph().getJobID().toString();
             log.info("deploy per_job with appId: {}}, jobId: {}", applicationId, flinkJobId);
@@ -214,11 +216,14 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper<Applic
         clusterSpecification.setCreateProgramDelay(true);
 
         String pluginRoot = launcherOptions.getChunjunDistDir();
+        //todo flink job jar
         String coreJarPath = PluginInfoUtil.getCoreJarPath(pluginRoot);
         File jarFile = new File(coreJarPath);
         clusterSpecification.setConfiguration(launcherOptions.loadFlinkConfiguration());
         clusterSpecification.setClasspaths(Collections.emptyList());
+        //todo 指定flink job mainclass
         clusterSpecification.setEntryPointClass(PluginInfoUtil.getMainClass());
+        //todo 指定flink job jar
         clusterSpecification.setJarFile(jarFile);
 
         clusterSpecification.setProgramArgs(programArgs.toArray(new String[0]));

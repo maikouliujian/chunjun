@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Chunjun commandline Launcher */
+//todo 提交flink任务的类
 @Slf4j
 public class Launcher {
     public static final String KEY_CHUNJUN_HOME = "CHUNJUN_HOME";
@@ -77,18 +78,19 @@ public class Launcher {
         }
 
         JobDeployer jobDeployer = new JobDeployer(launcherOptions, argList);
-
+        //todo 创建ClusterClient
         ClusterClientHelper<?> clusterClientHelper = createHelper(launcherOptions.getMode());
 
         // add ext class
         URLClassLoader urlClassLoader = (URLClassLoader) Launcher.class.getClassLoader();
         List<URL> jarUrlList = ExecuteProcessHelper.getExternalJarUrls(launcherOptions.getAddjar());
         ClassLoaderManager.loadExtraJar(jarUrlList, urlClassLoader);
+        //todo 提交flink任务
         try (ClusterClient<?> client = clusterClientHelper.submit(jobDeployer)) {
             log.info(client.getClusterId() + " submit successfully.");
         }
     }
-
+    //todo 创建ClusterClient
     private static ClusterClientHelper<?> createHelper(String mode) {
         switch (ClusterMode.getByName(mode)) {
             case local:
@@ -99,6 +101,7 @@ public class Launcher {
                 return new YarnSessionClusterClientHelper();
             case yarnPerJob:
                 return new YarnPerJobClusterClientHelper();
+                //todo 不支持yarnApplication
             case yarnApplication:
                 throw new DeploymentException(
                         "Application Mode not supported by Yarn deployments.");

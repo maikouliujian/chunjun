@@ -54,8 +54,10 @@ public class DataSyncFactoryUtil {
 
     public static SourceFactory discoverSource(SyncConfig config, StreamExecutionEnvironment env) {
         try {
+            //todo reader.name
             String pluginName = config.getJob().getReader().getName();
             String pluginClassName = PluginUtil.getPluginClassName(pluginName, OperatorType.source);
+            //todo 初始化SourceFactory
             return ClassLoaderManager.newInstance(
                     config.getSyncJarList(),
                     cl -> {
@@ -72,8 +74,10 @@ public class DataSyncFactoryUtil {
 
     public static SinkFactory discoverSink(SyncConfig config) {
         try {
+            //todo writer.name
             String pluginName = config.getJob().getContent().get(0).getWriter().getName();
             String pluginClassName = PluginUtil.getPluginClassName(pluginName, OperatorType.sink);
+            //todo 初始化SinkFactory
             return ClassLoaderManager.newInstance(
                     config.getSyncJarList(),
                     cl -> {

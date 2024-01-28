@@ -81,7 +81,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
-
+//todo flink job启动类
 @Slf4j
 public class Main {
 
@@ -89,12 +89,16 @@ public class Main {
         log.info("------------program params-------------------------");
         Arrays.stream(args).forEach(arg -> log.info("{}", arg));
         log.info("-------------------------------------------");
-
+        //todo 配置解析
         Options options = new OptionParser(args).getOptions();
+        //todo sh ./bin/chunjun-yarn-session.sh -job chunjun-examples/json/stream/stream.json -confProp {\"yarn.application.id\":\"SESSION_APPLICATION_ID\"}
+        //todo -job配置
         String job = URLDecoder.decode(options.getJob(), StandardCharsets.UTF_8.name());
         String replacedJob = JobUtil.replaceJobParameter(options.getP(), job);
         Properties confProperties = PropertiesUtil.parseConf(options.getConfProp());
+        //todo 设置env
         StreamExecutionEnvironment env = EnvFactory.createStreamExecutionEnvironment(options);
+        //todo 设置tEnv
         StreamTableEnvironment tEnv =
                 EnvFactory.createStreamTableEnvironment(env, confProperties, options.getJobName());
         log.info(
@@ -148,8 +152,9 @@ public class Main {
             throws Exception {
         SyncConfig config = parseConfig(job, options);
         configStreamExecutionEnvironment(env, options, config);
-
+        //todo 寻找source
         SourceFactory sourceFactory = DataSyncFactoryUtil.discoverSource(config, env);
+        //todo 获取source DataStream
         DataStream<RowData> dataStreamSource = sourceFactory.createSource();
         SpeedConfig speed = config.getSpeed();
         if (speed.getReaderChannel() > 0) {
@@ -176,7 +181,7 @@ public class Main {
         boolean transformer =
                 config.getTransformer() != null
                         && StringUtils.isNotBlank(config.getTransformer().getTransformSql());
-
+        //todo 是否有transformer配置
         if (transformer) {
             dataStream = syncStreamToTable(tableEnv, config, dataStreamSource);
         } else {
@@ -186,13 +191,15 @@ public class Main {
         if (speed.isRebalance()) {
             dataStream = dataStream.rebalance();
         }
-
+        //todo 寻找sink
         SinkFactory sinkFactory = DataSyncFactoryUtil.discoverSink(config);
+        //todo 获取sink DataStream
         DataStreamSink<RowData> dataStreamSink = sinkFactory.createSink(dataStream);
         if (speed.getWriterChannel() > 0) {
+            //todo 设置并行度
             dataStreamSink.setParallelism(speed.getWriterChannel());
         }
-
+        //todo 执行任务
         JobExecutionResult result = env.execute(options.getJobName());
         if (env instanceof MyLocalStreamEnvironment) {
             PrintUtil.printResult(result.getAllAccumulatorResults());
@@ -212,7 +219,7 @@ public class Main {
         for (int i = 0; i < fieldNameList.size(); i++) {
             builder.columnByExpression(fieldNameList.get(i), expressions[i]);
         }
-
+        //todo DataStream--->table
         Table sourceTable = tableEnv.fromDataStream(sourceDataStream, builder.build());
 
         checkTableConfig(config.getReader());
@@ -225,6 +232,7 @@ public class Main {
         String[] tableFieldNames = adaptTable.getSchema().getFieldNames();
         TypeInformation<? extends RowData> typeInformation =
                 TableUtil.getTypeInformation(tableDataTypes, tableFieldNames);
+        //todo table--->DataStream
         DataStream<RowData> dataStream =
                 tableEnv.toRetractStream(adaptTable, typeInformation).map(f -> f.f1);
 
