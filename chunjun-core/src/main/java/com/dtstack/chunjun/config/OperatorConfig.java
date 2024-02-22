@@ -29,7 +29,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+//todo reader/writer的配置
 
+/****
+ * "reader": {
+ *           "parameter": {
+ *             "table": ["dev.test"],
+ *             "password": "Abc12345",
+ *             "database": "dev",
+ *             "port": 3306,
+ *             "cat": "insert,update,delete",
+ *             "host": "172.16.100.186",
+ *             "jdbcUrl": "jdbc:mysql://172.16.100.186:3306/dev",
+ *             "pavingData": true,
+ *             "username": "dev"
+ *           },
+ *           "name": "binlogreader"
+ *         }
+ */
 @Data
 public class OperatorConfig implements Serializable {
 

@@ -23,7 +23,7 @@ import com.dtstack.chunjun.mapping.MappingConfig;
 import lombok.Data;
 
 import java.io.Serializable;
-
+//todo job-content
 @Data
 public class ContentConfig implements Serializable {
 
@@ -32,7 +32,7 @@ public class ContentConfig implements Serializable {
     private OperatorConfig reader;
 
     private OperatorConfig writer;
-
+    //todo transformer只支持sql逻辑
     private TransformerConfig transformer;
 
     private MappingConfig nameMapping;

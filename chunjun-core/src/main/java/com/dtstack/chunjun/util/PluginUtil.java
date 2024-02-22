@@ -217,10 +217,13 @@ public class PluginUtil {
             case source:
                 //todo xxxxreader--->xxxxsource
                 String sourceName = pluginName.replace(READER_SUFFIX, SOURCE_SUFFIX);
+                //todo xxxxsource--->xxxxsourceFactory
                 pluginClassName = camelize(sourceName, SOURCE_SUFFIX);
                 break;
             case sink:
+                //todo xxxxwriter--->xxxxsink
                 String sinkName = pluginName.replace(WRITER_SUFFIX, SINK_SUFFIX);
+                //todo xxxxwriter--->xxxxsinkFactory
                 pluginClassName = camelize(sinkName, SINK_SUFFIX);
                 break;
             case dirty:
@@ -287,6 +290,7 @@ public class PluginUtil {
         left = ConnectorNameConvertUtil.convertClassPrefix(left);
         sb.append(left.substring(0, 1).toUpperCase()).append(left.substring(1));
         sb.append(suffix.substring(0, 1).toUpperCase()).append(suffix.substring(1));
+        //TODO xxxxFactory
         sb.append(GENERIC_SUFFIX);
         return sb.toString();
     }

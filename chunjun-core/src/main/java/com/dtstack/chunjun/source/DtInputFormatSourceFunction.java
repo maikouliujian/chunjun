@@ -95,7 +95,7 @@ public class DtInputFormatSourceFunction<OUT> extends InputFormatSourceFunction<
         }
 
         format.configure(parameters);
-        //todo 获取InputSplitProvider
+        //todo 获取InputSplitProvider【核心！！！！！！】
         provider = context.getInputSplitProvider();
         //todo typeInfo的序列化器
         serializer = typeInfo.createSerializer(getRuntimeContext().getExecutionConfig());
@@ -204,6 +204,7 @@ public class DtInputFormatSourceFunction<OUT> extends InputFormatSourceFunction<
 
                 final InputSplit split;
                 try {
+                    //todo 获取数据【核心！！！！！！】
                     split =
                             provider.getNextInputSplit(
                                     getRuntimeContext().getUserCodeClassLoader());

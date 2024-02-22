@@ -37,6 +37,7 @@ public class SyncConfig implements Serializable {
     private static final long serialVersionUID = 1964981610706788313L;
 
     /** ChunJun job */
+    //todo 任务配置 -job
     private JobConfig job;
 
     /** ChunJun提交端的插件包路径 */

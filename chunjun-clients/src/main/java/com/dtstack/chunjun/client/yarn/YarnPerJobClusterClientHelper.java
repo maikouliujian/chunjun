@@ -221,7 +221,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper<Applic
         File jarFile = new File(coreJarPath);
         clusterSpecification.setConfiguration(launcherOptions.loadFlinkConfiguration());
         clusterSpecification.setClasspaths(Collections.emptyList());
-        //todo 指定flink job mainclass
+        //todo 指定flink job mainclass!!!!!!
         clusterSpecification.setEntryPointClass(PluginInfoUtil.getMainClass());
         //todo 指定flink job jar
         clusterSpecification.setJarFile(jarFile);

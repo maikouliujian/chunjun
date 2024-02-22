@@ -106,9 +106,11 @@ public class Main {
                 tEnv.getConfig().getConfiguration().toString());
         switch (EJobType.getByName(options.getJobType())) {
             case SQL:
+                //todo 执行sql
                 exeSqlJob(env, tEnv, replacedJob, options);
                 break;
             case SYNC:
+                //todo 执行同步任务
                 exeSyncJob(env, tEnv, replacedJob, options);
                 break;
             default:
@@ -131,7 +133,9 @@ public class Main {
             List<URL> jarUrlList = ExecuteProcessHelper.getExternalJarUrls(options.getAddjar());
             String runMode = options.getRunMode();
             if ("batch".equalsIgnoreCase(runMode)) env.setRuntimeMode(RuntimeExecutionMode.BATCH);
+            //todo 使用statementSet包装sql
             StatementSet statementSet = SqlParser.parseSql(job, jarUrlList, tableEnv);
+            //todo 执行sql
             TableResult execute = statementSet.execute();
             if (env instanceof MyLocalStreamEnvironment) {
                 Optional<JobClient> jobClient = execute.getJobClient();

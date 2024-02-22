@@ -25,11 +25,72 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.LinkedList;
 //todo jobconfig
+
+/****
+ *{
+ *   "job": {
+ *     "content": [
+ *       {
+ *         "reader": {
+ *           "parameter": {
+ *             "table": ["dev.test"],
+ *             "password": "Abc12345",
+ *             "database": "dev",
+ *             "port": 3306,
+ *             "cat": "insert,update,delete",
+ *             "host": "172.16.100.186",
+ *             "jdbcUrl": "jdbc:mysql://172.16.100.186:3306/dev",
+ *             "pavingData": true,
+ *             "username": "dev"
+ *           },
+ *           "name": "binlogreader"
+ *         },
+ *         "writer": {
+ *           "parameter": {
+ *             "print": true,
+ *             "fullColumnName": ["data","database"],
+ *             "fullColumnType": ["string","string"],
+ *             "writeMode": "overwrite",
+ *             "partitionType": "DAY",
+ *             "tablesColumn" : "{\"test\":[{\"part\":false,\"comment\":\"\",\"type\":\"INT\",\"key\":\"before_data\"},{\"comment\":\"\",\"type\":\"INT\",\"key\":\"after_data\",\"part\":false},{\"part\":false,\"comment\":\"\",\"type\":\"VARCHAR\",\"key\":\"before_database\"},{\"comment\":\"\",\"type\":\"VARCHAR\",\"key\":\"after_database\",\"part\":false},{\"part\":false,\"comment\":\"\",\"type\":\"TIMESTAMP\",\"key\":\"before_create_date\"},{\"comment\":\"\",\"type\":\"TIMESTAMP\",\"key\":\"after_create_date\",\"part\":false},{\"comment\":\"\",\"type\":\"varchar\",\"key\":\"type\"},{\"comment\":\"\",\"type\":\"varchar\",\"key\":\"schema\"},{\"comment\":\"\",\"type\":\"varchar\",\"key\":\"table\"},{\"comment\":\"\",\"type\":\"bigint\",\"key\":\"ts\"}]}",
+ *             "partition": "pt",
+ *             "hadoopConfig": {
+ *               "dfs.ha.namenodes.ns1": "nn1,nn2",
+ *               "dfs.namenode.rpc-address.ns1.nn2": "kudu2:9000",
+ *               "dfs.client.failover.proxy.provider.ns1": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+ *               "dfs.namenode.rpc-address.ns1.nn1": "kudu1:9000",
+ *               "dfs.nameservices": "ns1"
+ *             },
+ *
+ *             "jdbcUrl": "jdbc:hive2://kudu2:10000/dev",
+ *             "defaultFS": "hdfs://ns1",
+ *             "fileType": "orc",
+ *             "charsetName": "utf-8",
+ *             "username": "admin"
+ *           },
+ *           "name": "hivewriter"
+ *         }
+ *       }
+ *     ],
+ *     "setting": {
+ *       "restore": {
+ *         "isRestore": true,
+ *         "isStream": true
+ *       },
+ *       "errorLimit": {},
+ *       "speed": {
+ *         "bytes": 0,
+ *         "channel": 1
+ *       }
+ *     }
+ *   }
+ * }
+ */
 @Data
 public class JobConfig implements Serializable {
 
     private static final long serialVersionUID = 1976555497399746622L;
-
+    //todo reader和writer承载配置,reader和writer都在content.get(0)中
     private LinkedList<ContentConfig> content;
 
     private SettingConfig setting = new SettingConfig();

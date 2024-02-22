@@ -55,7 +55,9 @@ public class DataSyncFactoryUtil {
     public static SourceFactory discoverSource(SyncConfig config, StreamExecutionEnvironment env) {
         try {
             //todo reader.name
+            //todo xxxxreader
             String pluginName = config.getJob().getReader().getName();
+            //todo xxxxSourceFactory
             String pluginClassName = PluginUtil.getPluginClassName(pluginName, OperatorType.source);
             //todo 初始化SourceFactory
             return ClassLoaderManager.newInstance(
