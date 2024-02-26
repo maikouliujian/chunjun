@@ -24,7 +24,7 @@ import com.dtstack.chunjun.cdc.ddl.definition.ColumnOperator;
 import com.dtstack.chunjun.cdc.ddl.definition.DataBaseOperator;
 import com.dtstack.chunjun.cdc.ddl.definition.DdlOperator;
 import com.dtstack.chunjun.cdc.ddl.definition.TableOperator;
-import com.dtstack.chunjun.ddl.convent.mysql.parse.impl.ChunjunMySqlParserImpl;
+//import com.dtstack.chunjun.ddl.convent.mysql.parse.impl.ChunjunMySqlParserImpl;
 import com.dtstack.chunjun.ddl.parse.util.SqlNodeUtil;
 import com.dtstack.chunjun.mapping.MappingConf;
 import com.dtstack.chunjun.mapping.MappingRule;
@@ -118,7 +118,7 @@ public class MysqlDdlConventImpl implements DdlConvent {
         SqlParser.Config mysqlConfig =
                 SqlParser.config()
                         // 定义解析工厂
-                        .withParserFactory(ChunjunMySqlParserImpl.FACTORY)
+                        //.withParserFactory(ChunjunMySqlParserImpl.FACTORY)
                         .withConformance(SqlConformanceEnum.MYSQL_5)
                         .withLex(Lex.MYSQL);
         return mysqlConfig;

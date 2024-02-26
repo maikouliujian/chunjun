@@ -27,6 +27,7 @@ public class ClassLoaderSupplierCallBack {
 
     public static <R> R callbackAndReset(
             ClassLoaderSupplier<R> supplier, ClassLoader toSetClassLoader) throws Exception {
+        //todo 更新contextClassLoader
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(toSetClassLoader);
         try {

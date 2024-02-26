@@ -66,6 +66,7 @@ public class DataSyncFactoryUtil {
         try {
             String pluginName = config.getJob().getReader().getName();
             String pluginClassName = PluginUtil.getPluginClassName(pluginName, OperatorType.source);
+            //todo 加载pluginClassName对象
             return ClassLoaderManager.newInstance(
                     config.getSyncJarList(),
                     cl -> {

@@ -50,6 +50,7 @@
               "dfs.client.failover.proxy.provider.ns": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
               "fs.hdfs.impl.disable.cache": "true",
               "fs.hdfs.impl": "org.apache.hadoop.hdfs.DistributedFileSystem",
+              //todo hive.metastore.uris
               "hive.metastore.uris": "thrift://hadoop3x1:9083",
               "hadoop.user.name": "root",
               "hive.metastore.warehouse.dir": "/warehouse/tablespace/managed/hive",

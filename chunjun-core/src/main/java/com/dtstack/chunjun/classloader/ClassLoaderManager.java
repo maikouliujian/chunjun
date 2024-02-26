@@ -62,6 +62,7 @@ public class ClassLoaderManager {
         for (String path : jarPathList) {
             jarUrlList.add(new File(path).toURI().toURL());
         }
+        //todo 获取加载jarUrlList的自定义classloader
         ClassLoader classLoader = retrieveClassLoad(jarUrlList);
         return ClassLoaderSupplierCallBack.callbackAndReset(supplier, classLoader);
     }
@@ -76,6 +77,7 @@ public class ClassLoaderManager {
                         URL[] urls = jarUrls.toArray(new URL[0]);
                         ClassLoader parentClassLoader =
                                 Thread.currentThread().getContextClassLoader();
+                        //todo 创建可加载urls的类加载器
                         URLClassLoader classLoader = new URLClassLoader(urls, parentClassLoader);
                         LOG.info("jarUrl:{} create ClassLoad successful...", jarUrlkey);
                         return classLoader;

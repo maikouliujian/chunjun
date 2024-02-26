@@ -61,7 +61,7 @@ public class Launcher {
     public static void main(String[] args) throws Exception {
         OptionParser optionParser = new OptionParser(args);
         Options launcherOptions = optionParser.getOptions();
-
+        //todo 设置config/jar(chunjun、flink、hadoop)包目录
         findDefaultConfigDir(launcherOptions);
 
         List<String> argList = optionParser.getProgramExeArgList();
@@ -78,7 +78,7 @@ public class Launcher {
             argList.add(temp.keySet().toArray()[i].toString());
             argList.add(temp.values().toArray()[i].toString());
         }
-
+        //todo jobDeployer包含launcherOptions
         JobDeployer jobDeployer = new JobDeployer(launcherOptions, argList);
 
         ClusterClientHelper clusterClientHelper;
@@ -155,11 +155,11 @@ public class Launcher {
             if (flinkHome.endsWith(File.separator)) {
                 flinkHome = flinkHome.substring(0, flinkHome.lastIndexOf(File.separator));
             }
-
+            //todo 设置flink/conf
             if (StringUtils.isEmpty(launcherOptions.getFlinkConfDir())) {
                 launcherOptions.setFlinkConfDir(flinkHome + "/conf");
             }
-
+            //todo 设置flink/lib
             if (StringUtils.isEmpty(launcherOptions.getFlinkLibDir())) {
                 launcherOptions.setFlinkLibDir(flinkHome + "/lib");
             }
@@ -185,6 +185,7 @@ public class Launcher {
         if (StringUtils.isEmpty(distDir)) {
             notConfiguredException(KEY_CHUNJUN_HOME);
         }
+        //todo flink插件目录，比如connector
         System.setProperty(ConfigConstants.ENV_FLINK_PLUGINS_DIR, distDir);
     }
 

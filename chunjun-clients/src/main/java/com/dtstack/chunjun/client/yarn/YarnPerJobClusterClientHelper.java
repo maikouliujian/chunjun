@@ -76,6 +76,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
 
     @Override
     public ClusterClient submit(JobDeployer jobDeployer) throws Exception {
+        //todo 程序启动的配置
         Options launcherOptions = jobDeployer.getLauncherOptions();
         String confProp = launcherOptions.getConfProp();
         if (StringUtils.isBlank(confProp)) {
@@ -91,6 +92,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         SecurityUtils.install(new SecurityConfiguration(flinkConfig));
 
         ClusterSpecification clusterSpecification = createClusterSpecification(jobDeployer);
+        //todo 创建YarnClusterDescriptor，并添加config和libs
         YarnClusterDescriptor descriptor =
                 createPerJobClusterDescriptor(launcherOptions, flinkConfig);
 
@@ -102,7 +104,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
 
         return provider.getClusterClient();
     }
-
+    //todo 创建YarnClusterDescriptor，并添加config和libs
     private YarnClusterDescriptor createPerJobClusterDescriptor(
             Options launcherOptions, Configuration flinkConfig) throws MalformedURLException {
         String flinkLibDir = launcherOptions.getFlinkLibDir();
@@ -132,8 +134,10 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         }
 
         YarnConfiguration yarnConfig =
+                //todo hadoop配置
                 YarnConfLoader.getYarnConf(launcherOptions.getHadoopConfDir());
         YarnClient yarnClient = YarnClient.createYarnClient();
+        //todo 根据hadoop配置启动yarn
         yarnClient.init(yarnConfig);
         yarnClient.start();
 
@@ -158,10 +162,12 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
                 if (jar.toURI().toURL().toString().contains("flink-dist")) {
                     descriptor.setLocalJarPath(new Path(jar.toURI().toURL().toString()));
                 } else if (!isRemoteJarPath) {
+                    //todo 添加jars
                     shipFiles.add(jar);
                 }
             }
         }
+        //todo 添加flink/lib下的jar包
         descriptor.addShipFiles(shipFiles);
 
         return descriptor;
@@ -219,7 +225,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         }
 
         clusterSpecification.setCreateProgramDelay(true);
-
+        //todo ChunjunDistDir目录
         String pluginRoot = launcherOptions.getChunjunDistDir();
         String coreJarPath = PluginInfoUtil.getCoreJarPath(pluginRoot);
         File jarFile = new File(coreJarPath);
