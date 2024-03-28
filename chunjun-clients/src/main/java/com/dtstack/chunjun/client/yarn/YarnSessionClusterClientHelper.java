@@ -117,8 +117,10 @@ public class YarnSessionClusterClientHelper implements ClusterClientHelper {
                                                         YarnClientYarnClusterInformationRetriever
                                                                 .create(yarnClient),
                                                         true)) {
+                                            //todo session模式，根据applicationId获取集群客户端
                                             ClusterClient clusterClient =
                                                     yarnClusterDescriptor
+                                                            //todo 检索
                                                             .retrieve(applicationId)
                                                             .getClusterClient();
                                             JobGraph jobGraph =
@@ -147,6 +149,7 @@ public class YarnSessionClusterClientHelper implements ClusterClientHelper {
         set.add("Apache Flink");
         EnumSet<YarnApplicationState> enumSet = EnumSet.noneOf(YarnApplicationState.class);
         enumSet.add(YarnApplicationState.RUNNING);
+        //todo 获取flink任务的所有的ApplicationReport
         List<ApplicationReport> reportList = yarnClient.getApplications(set, enumSet);
 
         ApplicationId applicationId = null;
@@ -177,6 +180,7 @@ public class YarnSessionClusterClientHelper implements ClusterClientHelper {
             if (isOverMaxResource) {
                 maxMemory = thisMemory;
                 maxCores = thisCores;
+                //todo 获取application
                 applicationId = report.getApplicationId();
             }
         }

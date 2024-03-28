@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class S3DynamicTableFactory implements DynamicTableSourceFactory, DynamicTableSinkFactory {
+    //todo s3-x
     private static final String IDENTIFIER = "s3-x";
 
     @Override

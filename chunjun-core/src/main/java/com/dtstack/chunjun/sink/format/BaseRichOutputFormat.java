@@ -86,6 +86,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * snapshotState、notifyCheckpointComplete may never call, Only call notifyCheckpointAborted.this
  * maybe a problem ,should make users perceive
  */
+//todo 各OutputFormat的顶级父类
 public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
         implements CleanupWhenUnsuccessful, InitializeOnMaster, FinalizeOnMaster {
 
@@ -210,6 +211,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
         this.taskNumber = taskNumber;
         this.numTasks = numTasks;
         this.context = (StreamingRuntimeContext) getRuntimeContext();
+        //todo 是否开启ckp
         this.checkpointEnabled = context.isCheckpointingEnabled();
         this.batchSize = config.getBatchSize();
         this.rows = new ArrayList<>(batchSize);
@@ -259,6 +261,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
         if (initAccumulatorAndDirty) {
             initAccumulatorCollector();
         }
+        //todo 各子类实现
         openInternal(taskNumber, numTasks);
         this.startTime = System.currentTimeMillis();
 
@@ -272,7 +275,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
                 config.getClass().getSimpleName(),
                 JsonUtil.toPrintJson(config));
     }
-
+    //todo OutputFormat写数据的入口
     @Override
     public synchronized void writeRecord(RowData rowData) {
         checkTimerWriteException();
@@ -282,11 +285,13 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
             size = 1;
         } else {
             if (batchSize <= 1) {
+                //todo 单条写
                 writeSingleRecord(rowData, numWriteCounter);
                 size = 1;
             } else {
                 rows.add(rowData);
                 if (rows.size() >= batchSize) {
+                    //todo 批量写
                     writeRecordInternal();
                     size = batchSize;
                 }
@@ -596,7 +601,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
     protected void preCommit() throws Exception {}
 
     /**
-     * 写出单条数据
+     * todo 写出单条数据，由子类实现
      *
      * @param rowData 数据
      * @throws WriteRecordException
@@ -604,7 +609,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
     protected abstract void writeSingleRecordInternal(RowData rowData) throws WriteRecordException;
 
     /**
-     * 写出多条数据
+     * todo 写出多条数据，由子类实现
      *
      * @throws Exception
      */

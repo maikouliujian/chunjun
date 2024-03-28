@@ -65,7 +65,7 @@ public class DtOutputFormatSinkFunction<IN> extends OutputFormatSinkFunction<IN>
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOG = LoggerFactory.getLogger(DtOutputFormatSinkFunction.class);
-
+    //todo 真正写数据的类
     protected OutputFormat<IN> format;
     protected boolean cleanupCalled = false;
 
@@ -114,6 +114,7 @@ public class DtOutputFormatSinkFunction<IN> extends OutputFormatSinkFunction<IN>
     @Override
     public void invoke(IN record, Context context) throws Exception {
         try {
+            //todo 写数据入口！！！！！！
             format.writeRecord(record);
         } catch (Exception ex) {
             cleanup();

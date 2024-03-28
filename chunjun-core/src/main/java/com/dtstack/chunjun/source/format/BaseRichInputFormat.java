@@ -65,6 +65,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author jiangbo
  */
+//todo 各InputFormat的顶级父类，读取的核心逻辑都在这个类
 public abstract class BaseRichInputFormat extends RichInputFormat<RowData, InputSplit> {
     protected static final long serialVersionUID = 1L;
 

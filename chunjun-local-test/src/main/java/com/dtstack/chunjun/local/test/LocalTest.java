@@ -47,7 +47,7 @@ public class LocalTest {
         //        confProperties.setProperty("state.checkpoints.dir", "file:///ck");
         String userDir = System.getProperty("user.dir");
 
-        String jobPath = userDir + "/chunjun-examples/json/stream/stream.json";
+        String jobPath = userDir + "/config/kafka2hive.json";
         String chunjunDistDir = userDir + "/start-chunjun-dist";
         String s = "";
 

@@ -58,6 +58,7 @@ public class S3OutputFormat extends BaseRichOutputFormat {
 
     private static String currentUploadId;
     private static boolean willClose = false;
+    //todo s3写出
     private transient StringWriter sw;
     private transient List<MyPartETag> myPartETags;
 
@@ -216,12 +217,14 @@ public class S3OutputFormat extends BaseRichOutputFormat {
             if (this.writerUtil == null) {
                 nextBlock();
             }
+            //todo 数据
             String[] stringRecord = new String[columnNameList.size()];
             // convert row to string
             rowConverter.toExternal(rowData, stringRecord);
+            //todo 将一行中的数据挨个写出去
             try {
                 for (int i = 0; i < columnNameList.size(); ++i) {
-
+                    //todo column 每一列的值
                     String column = stringRecord[i];
 
                     if (column == null) {
@@ -229,6 +232,7 @@ public class S3OutputFormat extends BaseRichOutputFormat {
                     }
                     writerUtil.write(column);
                 }
+                //todo 一行写完！！！！！！写一行的分隔符
                 writerUtil.endRecord();
                 flushDataInternal();
             } catch (Exception ex) {

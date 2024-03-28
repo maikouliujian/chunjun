@@ -97,6 +97,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
                 createPerJobClusterDescriptor(launcherOptions, flinkConfig);
 
         ClusterClientProvider<ApplicationId> provider =
+                //todo 提交flink作业
                 descriptor.deployJobCluster(clusterSpecification, new JobGraph(), true);
         String applicationId = provider.getClusterClient().getClusterId().toString();
         String flinkJobId = clusterSpecification.getJobGraph().getJobID().toString();
@@ -140,7 +141,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         //todo 根据hadoop配置启动yarn
         yarnClient.init(yarnConfig);
         yarnClient.start();
-
+        //todo 根据yarnclient获取YarnClusterDescriptor
         YarnClusterDescriptor descriptor =
                 new YarnClusterDescriptor(
                         flinkConfig,

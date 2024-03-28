@@ -236,7 +236,10 @@ public class HdfsTransactionOutputFormat extends HdfsOrcOutputFormat {
                             });
         }
     }
-
+    //todo HiveStreamingConnection 是干啥用的？？？
+    //todo 从 Hive 3.0.0 版本开始，不推荐使用流式数据提取,该 API 适用于连续生成数据的流 Client 端.
+    // Hive 流 API 的类和接口部分大致分为两类。 第一组提供对连接和事务 Management 的支持，而第二组提供 I/O 支持。 事务由 MetastoreManagement。
+    // 直接对表定义的目标文件系统(HDFS，S3A 等)执行写操作。 流式传输到hive未分区表，静态分区的分区表和动态分区的分区表均受支持.
     private HiveStreamingConnection getConnection() {
         HiveStreamingConnection.Builder builder =
                 HiveStreamingConnection.newBuilder()

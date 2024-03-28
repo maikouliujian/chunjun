@@ -205,6 +205,7 @@ public abstract class BaseHdfsOutputFormat extends BaseFileOutputFormat {
             FileStatus[] dataFiles = fs.listStatus(tmpDir);
             for (FileStatus dataFile : dataFiles) {
                 currentFilePath = dataFile.getPath().getName();
+                //todo rename
                 fs.rename(dataFile.getPath(), dir);
                 LOG.info("move temp file:{} to dir:{}", dataFile.getPath(), dir);
             }

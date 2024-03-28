@@ -151,7 +151,7 @@ public class KafkaDynamicSink implements DynamicTableSink, SupportsWritingMetada
 
         final FlinkKafkaProducer<RowData> kafkaProducer =
                 createKafkaProducer(keySerialization, valueSerialization);
-
+        //todo for flinksql使用
         return SinkFunctionProvider.of(kafkaProducer, parallelism);
     }
 

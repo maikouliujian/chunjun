@@ -30,8 +30,11 @@ import java.util.Date;
  */
 public abstract class AbstractBaseColumn implements Serializable {
     private static final long serialVersionUID = 1L;
+    //todo 一列的数据
     protected Object data;
+    //todo 一列的大小
     protected int byteSize;
+    //todo 一列的类型
     protected String type;
 
     public AbstractBaseColumn(final Object data, int byteSize) {

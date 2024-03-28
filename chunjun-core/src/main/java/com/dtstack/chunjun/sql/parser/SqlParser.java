@@ -39,7 +39,7 @@ import java.util.List;
  * @author xuchao
  */
 public class SqlParser {
-
+    //todo sql分割
     private static final char SQL_DELIMITER = ';';
 
     /**
@@ -54,7 +54,7 @@ public class SqlParser {
         if (StringUtils.isBlank(sql)) {
             throw new IllegalArgumentException("SQL must be not empty!");
         }
-
+        //todo 返回无注释的sql
         sql = DtStringUtil.dealSqlComment(sql);
         StatementSet statement = tableEnvironment.createStatementSet();
         Splitter splitter = new Splitter(SQL_DELIMITER);
@@ -66,6 +66,7 @@ public class SqlParser {
                 .forEach(
                         stmt -> {
                             try {
+                                //todo 执行sql
                                 stmtParser.handleStmt(stmt, tableEnvironment, statement, urlList);
                             } catch (Exception e) {
                                 throw new ChunJunSqlParseException(
@@ -75,7 +76,7 @@ public class SqlParser {
 
         return statement;
     }
-
+    //todo 责任链模式
     private static AbstractStmtParser createParserChain() {
 
         AbstractStmtParser uploadFileStmtParser = new UploadFileStmtParser();
