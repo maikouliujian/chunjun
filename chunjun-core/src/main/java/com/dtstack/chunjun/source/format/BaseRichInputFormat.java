@@ -198,6 +198,7 @@ public abstract class BaseRichInputFormat extends RichInputFormat<RowData, Input
         try {
             internalRow = nextRecordInternal(rowData);
         } catch (ReadRecordException e) {
+            //todo 如果读取数据异常，将异常数据收集到dirtyManager中
             dirtyManager.collect(e.getRowData(), e, null);
         }
         if (internalRow != null) {
