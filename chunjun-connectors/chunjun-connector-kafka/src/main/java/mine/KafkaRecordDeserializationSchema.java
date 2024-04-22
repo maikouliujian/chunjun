@@ -92,10 +92,10 @@ public interface KafkaRecordDeserializationSchema<T> extends Serializable, Resul
      * @return A {@link KafkaRecordDeserializationSchema} that uses the given {@link
      *     DeserializationSchema} to deserialize a {@link ConsumerRecord} from its value.
      */
-//    static <V> KafkaRecordDeserializationSchema<V> valueOnly(
-//            DeserializationSchema<V> valueDeserializationSchema) {
-//        return new KafkaValueOnlyDeserializationSchemaWrapper<>(valueDeserializationSchema);
-//    }
+    //    static <V> KafkaRecordDeserializationSchema<V> valueOnly(
+    //            DeserializationSchema<V> valueDeserializationSchema) {
+    //        return new KafkaValueOnlyDeserializationSchemaWrapper<>(valueDeserializationSchema);
+    //    }
 
     /**
      * Wraps a Kafka {@link Deserializer} to a {@link KafkaRecordDeserializationSchema}.

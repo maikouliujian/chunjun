@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseFileOutputFormat extends BaseRichOutputFormat {
-
+    private static final long serialVersionUID = 9115780524964412797L;
     protected static final String TMP_DIR_NAME = ".data";
     protected BaseFileConf baseFileConf;
     /** The first half of the file name currently written */

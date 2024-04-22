@@ -178,11 +178,11 @@ public class Main {
             Options options)
             throws Exception {
         SyncConf config = parseConf(job, options);
-        //todo 将任务所用到的插件包注册到env中【包含source和sink】！！！！！！
+        // todo 将任务所用到的插件包注册到env中【包含source和sink】！！！！！！
         configStreamExecutionEnvironment(env, options, config);
-        //todo 寻找source
+        // todo 寻找source
         SourceFactory sourceFactory = DataSyncFactoryUtil.discoverSource(config, env);
-        //todo 获取source DataStream
+        // todo 获取source DataStream
         DataStream<RowData> dataStreamSource = sourceFactory.createSource();
         SpeedConf speed = config.getSpeed();
         if (speed.getReaderChannel() > 0) {
@@ -219,9 +219,9 @@ public class Main {
         if (speed.isRebalance()) {
             dataStream = dataStream.rebalance();
         }
-        //todo 寻找sink
+        // todo 寻找sink
         SinkFactory sinkFactory = DataSyncFactoryUtil.discoverSink(config);
-        //todo 获取sink DataStream
+        // todo 获取sink DataStream
         DataStreamSink<RowData> dataStreamSink = sinkFactory.createSink(dataStream);
         if (speed.getWriterChannel() > 0) {
             dataStreamSink.setParallelism(speed.getWriterChannel());
@@ -313,7 +313,7 @@ public class Main {
             StreamExecutionEnvironment env, Options options, SyncConf config) {
 
         if (config != null) {
-            //todo 将任务所用到的插件包注册到env中【包含source和sink】！！！！！！
+            // todo 将任务所用到的插件包注册到env中【包含source和sink】！！！！！！
             PluginUtil.registerPluginUrlToCachedFile(options, config, env);
             env.setParallelism(config.getSpeed().getChannel());
         } else {

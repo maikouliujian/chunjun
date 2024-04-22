@@ -52,7 +52,7 @@ public abstract class AbstractStmtParser {
             nextStmtParser.handleStmt(stmt, tEnv, statementSet, jarUrlList);
         } else {
             // Iff all StmtParser can not handle.
-            //todo 责任链执行完，无匹配则执行sql
+            // todo 责任链执行完，无匹配则执行sql
             tEnv.executeSql(stmt);
         }
     }

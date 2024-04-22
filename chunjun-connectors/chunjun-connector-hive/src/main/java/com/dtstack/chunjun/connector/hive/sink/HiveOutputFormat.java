@@ -82,7 +82,7 @@ public class HiveOutputFormat extends BaseRichOutputFormat {
     public void configure(org.apache.flink.configuration.Configuration parameters) {
         super.configure(parameters);
         this.parameters = parameters;
-        //todo 分区format
+        // todo 分区format
         partitionFormat = getPartitionFormat();
         tableCacheMap = new HashMap<>(16);
         outputFormatMap = new HashMap<>(16);
@@ -145,7 +145,7 @@ public class HiveOutputFormat extends BaseRichOutputFormat {
                 }
             }
         }
-        //todo 有校验是否获取新的分区的逻辑,以及获取OutputFormat
+        // todo 有校验是否获取新的分区的逻辑,以及获取OutputFormat
         Pair<BaseHdfsOutputFormat, TableInfo> formatPair =
                 getHdfsOutputFormat(tableName, rowData, dataMap);
 
@@ -256,9 +256,9 @@ public class HiveOutputFormat extends BaseRichOutputFormat {
 
     private Pair<BaseHdfsOutputFormat, TableInfo> getHdfsOutputFormat(
             String tableName, RowData rowData, Map<String, Object> event) {
-        //todo 分区value
+        // todo 分区value
         String partitionValue = partitionFormat.format(new Date());
-        //todo 分区path
+        // todo 分区path
         String partitionPath =
                 String.format(HiveUtil.PARTITION_TEMPLATE, hiveConf.getPartition(), partitionValue);
         String hiveTablePath = tableName + File.separatorChar + partitionPath;
@@ -277,7 +277,7 @@ public class HiveOutputFormat extends BaseRichOutputFormat {
                     connectionInfo,
                     getRuntimeContext().getDistributedCache());
             String path = tableInfo.getPath() + File.separatorChar + partitionPath;
-            //todo 创建outputFormat，最终调用的也是hdfsOutputFormat！！！！！！
+            // todo 创建outputFormat，最终调用的也是hdfsOutputFormat！！！！！！
             outputFormat =
                     createHdfsOutputFormat(
                             tableInfo, path, hiveTablePath, rowData instanceof ColumnRowData);
@@ -394,7 +394,7 @@ public class HiveOutputFormat extends BaseRichOutputFormat {
         }
         return tableInfo;
     }
-    //todo hive-connector可以滚动分区，就是分区不灵活，不能支持各种分区类型！！！！！！
+    // todo hive-connector可以滚动分区，就是分区不灵活，不能支持各种分区类型！！！！！！
     private SimpleDateFormat getPartitionFormat() {
         if (StringUtils.isBlank(hiveConf.getPartitionType())) {
             throw new IllegalArgumentException("partitionEnumStr is empty!");

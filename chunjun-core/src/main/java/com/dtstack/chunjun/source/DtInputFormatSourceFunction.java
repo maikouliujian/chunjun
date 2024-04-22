@@ -66,7 +66,7 @@ public class DtInputFormatSourceFunction<OUT> extends InputFormatSourceFunction<
 
     private final TypeInformation<OUT> typeInfo;
     private transient TypeSerializer<OUT> serializer;
-    //todo 真正读取数据的类
+    // todo 真正读取数据的类
     private final InputFormat<OUT, InputSplit> format;
 
     private transient InputSplitProvider provider;

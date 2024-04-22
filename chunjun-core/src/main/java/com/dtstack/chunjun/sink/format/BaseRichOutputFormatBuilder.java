@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 public abstract class BaseRichOutputFormatBuilder<T extends BaseRichOutputFormat> {
 
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
-    //todo 真正操作数据的类，是BaseRichOutputFormat的子类！！！！！！
+    // todo 真正操作数据的类，是BaseRichOutputFormat的子类！！！！！！
     protected T format;
 
     public BaseRichOutputFormatBuilder(T format) {

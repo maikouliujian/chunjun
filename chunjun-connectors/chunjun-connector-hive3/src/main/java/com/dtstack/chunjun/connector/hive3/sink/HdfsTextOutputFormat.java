@@ -114,7 +114,7 @@ public class HdfsTextOutputFormat extends BaseHdfsOutputFormat {
 
         try {
             byte[] bytes = line.getBytes(hdfsConf.getEncoding());
-            //todo 写数据
+            // todo 写数据
             this.stream.write(bytes);
             this.stream.write(NEWLINE);
             rowsOfCurrentBlock++;

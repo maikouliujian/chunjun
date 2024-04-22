@@ -36,7 +36,7 @@ public class SyncConf implements Serializable {
     private JobConf job;
 
     /** ChunJun提交端的插件包路径 */
-    //todo chunjun-dist
+    // todo chunjun-dist
     private String pluginRoot;
     /** ChunJun运行时服务器上的远程端插件包路径 */
     private String remotePluginPath;
@@ -44,7 +44,7 @@ public class SyncConf implements Serializable {
     private String savePointPath;
 
     /** 本次任务所需插件jar包路径列表 */
-    //todo 本次任务所需插件jar包路径列表
+    // todo 本次任务所需插件jar包路径列表
     private List<String> syncJarList;
 
     /**

@@ -110,14 +110,14 @@ class DynamicKafkaDeserializationSchema implements KafkaDeserializationSchema<Ro
             throws Exception {
         // shortcut in case no output projection is required,
         // also not for a cartesian product with the keys
-        //todo // 消息不需要解析 key
+        // todo // 消息不需要解析 key
         if (keyDeserialization == null && !hasMetadata) {
             valueDeserialization.deserialize(record.value(), collector);
             return;
         }
 
         // buffer key(s)
-        //todo // 消息需要解析key
+        // todo // 消息需要解析key
         if (keyDeserialization != null) {
             keyDeserialization.deserialize(record.key(), keyCollector);
         }
@@ -126,7 +126,7 @@ class DynamicKafkaDeserializationSchema implements KafkaDeserializationSchema<Ro
         outputCollector.inputRecord = record;
         outputCollector.physicalKeyRows = keyCollector.buffer;
         outputCollector.outputCollector = collector;
-        //todo // 在 upsert 模式下如果 消息的 value 为空当做一条 删除消息
+        // todo // 在 upsert 模式下如果 消息的 value 为空当做一条 删除消息
         if (record.value() == null && upsertMode) {
             // collect tombstone messages in upsert mode by hand
             outputCollector.collect(null);
@@ -218,14 +218,15 @@ class DynamicKafkaDeserializationSchema implements KafkaDeserializationSchema<Ro
         @Override
         public void collect(RowData physicalValueRow) {
             // no key defined
-            //todo 没有key 这不是 upsert kafka 的场景(upsert kafka一定需要有key)
+            // todo 没有key 这不是 upsert kafka 的场景(upsert kafka一定需要有key)
             if (keyProjection.length == 0) {
                 emitRow(null, (GenericRowData) physicalValueRow);
                 return;
             }
 
             // otherwise emit a value for each key
-            //todo 这里对 kafka mesg value  进行解析看看是否包含 除key 字段之外还有其他字段。如果其他字段都不存在相当于 kafka mesg value 为空
+            // todo 这里对 kafka mesg value  进行解析看看是否包含 除key 字段之外还有其他字段。如果其他字段都不存在相当于 kafka mesg value
+            // 为空
             for (RowData physicalKeyRow : physicalKeyRows) {
                 emitRow((GenericRowData) physicalKeyRow, (GenericRowData) physicalValueRow);
             }
@@ -240,7 +241,7 @@ class DynamicKafkaDeserializationSchema implements KafkaDeserializationSchema<Ro
                 @Nullable GenericRowData physicalKeyRow,
                 @Nullable GenericRowData physicalValueRow) {
             final RowKind rowKind;
-            //todo 如果 physicalValueRow 为 null 且是 upsertMode 模式下 则 rowKind 为删除
+            // todo 如果 physicalValueRow 为 null 且是 upsertMode 模式下 则 rowKind 为删除
             if (physicalValueRow == null) {
                 if (upsertMode) {
                     rowKind = RowKind.DELETE;

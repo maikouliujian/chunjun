@@ -101,7 +101,7 @@ public abstract class DirtyDataCollector implements Runnable, Serializable {
     protected void addConsumed(long count) {
         consumedCounter.add(count);
         if (consumedCounter.getLocalValue() >= maxConsumed) {
-            //todo 失败数大于最大失败数，抛出异常
+            // todo 失败数大于最大失败数，抛出异常
             throw new NoRestartException(
                     String.format(
                             "The dirty consumer shutdown, due to the consumed count exceed the max-consumed [%s]",

@@ -28,14 +28,12 @@ import org.apache.flink.configuration.ReadableConfig;
 import org.apache.flink.connector.kafka.source.KafkaSourceOptions;
 import org.apache.flink.streaming.connectors.kafka.config.StartupMode;
 import org.apache.flink.streaming.connectors.kafka.internals.KafkaTopicPartition;
-import org.apache.flink.streaming.connectors.kafka.partitioner.FlinkKafkaPartitioner;
 import org.apache.flink.streaming.connectors.kafka.table.KafkaDynamicSink;
 import org.apache.flink.table.api.ValidationException;
 import org.apache.flink.table.catalog.ObjectIdentifier;
 import org.apache.flink.table.connector.format.DecodingFormat;
 import org.apache.flink.table.connector.format.EncodingFormat;
 import org.apache.flink.table.connector.format.Format;
-import org.apache.flink.table.connector.sink.DynamicTableSink;
 import org.apache.flink.table.connector.source.DynamicTableSource;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.factories.*;
@@ -51,22 +49,16 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.dtstack.chunjun.table.options.SinkOptions.SINK_PARALLELISM;
 import static org.apache.flink.streaming.connectors.kafka.table.KafkaOptions.*;
 
-
-
 /**
  * Factory for creating configured instances of {@link KafkaDynamicSource} and {@link
  * KafkaDynamicSink}.
- *
  */
 @Internal
-public class KafkaDynamicTableFactory
-        implements DynamicTableSourceFactory {
+public class KafkaDynamicTableFactory implements DynamicTableSourceFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaDynamicTableFactory.class);
     private static final ConfigOption<String> SINK_SEMANTIC =
@@ -110,21 +102,21 @@ public class KafkaDynamicTableFactory
         return options;
     }
 
-//    @Override
-//    public Set<ConfigOption<?>> forwardOptions() {
-//        return Stream.of(
-//                        PROPS_BOOTSTRAP_SERVERS,
-//                        PROPS_GROUP_ID,
-//                        TOPIC,
-//                        TOPIC_PATTERN,
-//                        SCAN_STARTUP_MODE,
-//                        SCAN_STARTUP_SPECIFIC_OFFSETS,
-//                        SCAN_TOPIC_PARTITION_DISCOVERY,
-//                        SCAN_STARTUP_TIMESTAMP_MILLIS,
-//                        SINK_PARTITIONER,
-//                        SINK_PARALLELISM)
-//                .collect(Collectors.toSet());
-//    }
+    //    @Override
+    //    public Set<ConfigOption<?>> forwardOptions() {
+    //        return Stream.of(
+    //                        PROPS_BOOTSTRAP_SERVERS,
+    //                        PROPS_GROUP_ID,
+    //                        TOPIC,
+    //                        TOPIC_PATTERN,
+    //                        SCAN_STARTUP_MODE,
+    //                        SCAN_STARTUP_SPECIFIC_OFFSETS,
+    //                        SCAN_TOPIC_PARTITION_DISCOVERY,
+    //                        SCAN_STARTUP_TIMESTAMP_MILLIS,
+    //                        SINK_PARTITIONER,
+    //                        SINK_PARALLELISM)
+    //                .collect(Collectors.toSet());
+    //    }
 
     @Override
     public DynamicTableSource createDynamicTableSource(Context context) {
@@ -142,12 +134,12 @@ public class KafkaDynamicTableFactory
 
         validateTableSourceOptions(tableOptions);
 
-//        validatePKConstraints(
-//                context.getObjectIdentifier(),
-//                context.getPrimaryKeyIndexes(),
-//                context.getCatalogTable().getOptions(),
-//                valueDecodingFormat);
-        //todo 建立StartupOptions
+        //        validatePKConstraints(
+        //                context.getObjectIdentifier(),
+        //                context.getPrimaryKeyIndexes(),
+        //                context.getCatalogTable().getOptions(),
+        //                valueDecodingFormat);
+        // todo 建立StartupOptions
         final StartupOptions startupOptions = getStartupOptions(tableOptions);
 
         final Properties properties = getKafkaProperties(context.getCatalogTable().getOptions());
@@ -159,7 +151,7 @@ public class KafkaDynamicTableFactory
                 KafkaSourceOptions.PARTITION_DISCOVERY_INTERVAL_MS.key(),
                 partitionDiscoveryInterval.orElse(-1L).toString());
         final DataType physicalDataType = context.getCatalogTable().getSchema().toRowDataType();
-        //final DataType physicalDataType = context.getPhysicalRowDataType();
+        // final DataType physicalDataType = context.getPhysicalRowDataType();
 
         final int[] keyProjection = createKeyFormatProjection(tableOptions, physicalDataType);
 
@@ -179,11 +171,10 @@ public class KafkaDynamicTableFactory
                 properties,
                 startupOptions.startupMode,
                 startupOptions.specificOffsets,
-                //todo 从某一个时间开始消费数据
+                // todo 从某一个时间开始消费数据
                 startupOptions.startupTimestampMillis,
                 context.getObjectIdentifier().asSummaryString());
     }
-
 
     // --------------------------------------------------------------------------------------------
 

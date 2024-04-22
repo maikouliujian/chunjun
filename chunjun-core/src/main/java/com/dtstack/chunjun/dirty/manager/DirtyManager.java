@@ -136,7 +136,7 @@ public class DirtyManager implements Serializable {
         entity.setDirtyContent(toString(data));
         entity.setFieldName(field);
         entity.setErrorMessage(ExceptionUtil.getErrorMessage(cause));
-        //todo 收集异常数据
+        // todo 收集异常数据
         consumer.offer(entity);
         errorCounter.add(1L);
     }

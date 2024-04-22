@@ -67,7 +67,7 @@ public abstract class SinkFactory implements RawTypeConvertible {
         Preconditions.checkNotNull(dataSet);
         Preconditions.checkNotNull(sinkName);
         Preconditions.checkNotNull(outputFormat);
-        //todo 通用的DtOutputFormatSinkFunction
+        // todo 通用的DtOutputFormatSinkFunction
         DtOutputFormatSinkFunction<RowData> sinkFunction =
                 new DtOutputFormatSinkFunction<>(outputFormat);
         DataStreamSink<RowData> dataStreamSink = dataSet.addSink(sinkFunction);

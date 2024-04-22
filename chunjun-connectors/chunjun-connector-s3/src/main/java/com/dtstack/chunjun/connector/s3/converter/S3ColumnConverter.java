@@ -100,7 +100,7 @@ public class S3ColumnConverter
                 throw new UnsupportedTypeException(type);
         }
     }
-    //todo 写出去
+    // todo 写出去
     @Override
     protected ISerializationConverter<String[]> createExternalConverter(LogicalType type) {
         switch (type.getTypeRoot()) {

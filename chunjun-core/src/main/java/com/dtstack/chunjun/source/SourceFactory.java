@@ -123,7 +123,7 @@ public abstract class SourceFactory implements RawTypeConvertible {
                 new DtInputFormatSourceFunction<>(inputFormat, getTypeInformation());
         return env.addSource(function, sourceName, getTypeInformation());
     }
-    //todo 为kafka使用
+    // todo 为kafka使用
     protected DataStream<RowData> createInput(
             RichParallelSourceFunction<RowData> function, String sourceName) {
         Preconditions.checkNotNull(sourceName);

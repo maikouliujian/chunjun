@@ -210,8 +210,8 @@ public class PluginUtil {
      * @param operatorType 算子类型
      * @return
      */
-    //todo xxxxReader--->xxxxSource
-    //todo xxxxSource--->xxxxFactory
+    // todo xxxxReader--->xxxxSource
+    // todo xxxxSource--->xxxxFactory
     public static String getPluginClassName(String pluginName, OperatorType operatorType) {
         String pluginClassName;
         switch (operatorType) {
@@ -219,9 +219,9 @@ public class PluginUtil {
                 pluginClassName = appendMetricClass(pluginName);
                 break;
             case source:
-                //todo xxxxReader--->xxxxSource
+                // todo xxxxReader--->xxxxSource
                 String sourceName = pluginName.replace(READER_SUFFIX, SOURCE_SUFFIX);
-                //todo xxxxSource--->xxxxFactory
+                // todo xxxxSource--->xxxxFactory
                 pluginClassName = camelize(sourceName, SOURCE_SUFFIX);
                 break;
             case sink:
@@ -323,14 +323,14 @@ public class PluginUtil {
         Set<URL> formatsUrlSet =
                 getJarFileDirPath(
                         FORMATS_SUFFIX, config.getPluginRoot(), config.getRemotePluginPath(), "");
-        //todo source jars
+        // todo source jars
         Set<URL> sourceUrlSet =
                 getJarFileDirPath(
                         config.getReader().getName(),
                         config.getPluginRoot(),
                         config.getRemotePluginPath(),
                         CONNECTOR_DIR_NAME);
-        //todo sink jars
+        // todo sink jars
         Set<URL> sinkUrlSet =
                 getJarFileDirPath(
                         config.getWriter().getName(),
@@ -444,7 +444,7 @@ public class PluginUtil {
                     GsonUtil.GSON.toJson(coreUrlSet),
                     e);
         }
-        //todo 设置jars
+        // todo 设置jars
         config.setSyncJarList(setPipelineOptionsToEnvConfig(env, urlList, options.getMode()));
     }
 

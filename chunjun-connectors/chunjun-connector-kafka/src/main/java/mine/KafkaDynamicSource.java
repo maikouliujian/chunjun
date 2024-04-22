@@ -35,7 +35,6 @@ import org.apache.flink.streaming.connectors.kafka.internals.KafkaTopicPartition
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.connector.ChangelogMode;
 import org.apache.flink.table.connector.Projection;
-import org.apache.flink.table.connector.ProviderContext;
 import org.apache.flink.table.connector.format.DecodingFormat;
 import org.apache.flink.table.connector.source.DataStreamScanProvider;
 import org.apache.flink.table.connector.source.DynamicTableSource;
@@ -223,16 +222,15 @@ public class KafkaDynamicSource
 
         return new DataStreamScanProvider() {
             @Override
-            public DataStream<RowData> produceDataStream(
-                    StreamExecutionEnvironment execEnv) {
+            public DataStream<RowData> produceDataStream(StreamExecutionEnvironment execEnv) {
                 if (watermarkStrategy == null) {
                     watermarkStrategy = WatermarkStrategy.noWatermarks();
                 }
-                //todo 创建kafka source datastream
+                // todo 创建kafka source datastream
                 DataStreamSource<RowData> sourceStream =
                         execEnv.fromSource(
                                 kafkaSource, watermarkStrategy, "KafkaSource-" + tableIdentifier);
-                //providerContext.generateUid(KAFKA_TRANSFORMATION).ifPresent(sourceStream::uid);
+                // providerContext.generateUid(KAFKA_TRANSFORMATION).ifPresent(sourceStream::uid);
                 return sourceStream;
             }
 
@@ -421,11 +419,11 @@ public class KafkaDynamicSource
                 kafkaSourceBuilder.setStartingOffsets(OffsetsInitializer.offsets(offsets));
                 break;
             case TIMESTAMP:
-                //todo 从某一个时间开始读取
+                // todo 从某一个时间开始读取
                 kafkaSourceBuilder.setStartingOffsets(
                         OffsetsInitializer.timestamp(startupTimestampMillis));
-                //todo 是否可以开放endTimestampMillis？？？？？？
-                kafkaSourceBuilder.setBounded()
+                // todo 是否可以开放endTimestampMillis？？？？？？
+                kafkaSourceBuilder.setBounded();
                 break;
         }
 
@@ -483,7 +481,7 @@ public class KafkaDynamicSource
                                         keyProjection.length + valueProjection.length,
                                         adjustedPhysicalArity))
                         .toArray();
-        //todo 反序列化器
+        // todo 反序列化器
         return new DynamicKafkaDeserializationSchema(
                 adjustedPhysicalArity,
                 keyDeserialization,
@@ -612,7 +610,10 @@ public class KafkaDynamicSource
 
         final DynamicKafkaDeserializationSchema.MetadataConverter converter;
 
-        ReadableMetadata(String key, DataType dataType, DynamicKafkaDeserializationSchema.MetadataConverter converter) {
+        ReadableMetadata(
+                String key,
+                DataType dataType,
+                DynamicKafkaDeserializationSchema.MetadataConverter converter) {
             this.key = key;
             this.dataType = dataType;
             this.converter = converter;

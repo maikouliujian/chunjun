@@ -152,7 +152,7 @@ public class KafkaConsumerWrapper extends RichParallelSourceFunction<RowData>
 
     @Override
     public void run(SourceContext<RowData> ctx) throws Exception {
-        //todo flinkKafkaConsumer run
+        // todo flinkKafkaConsumer run
         flinkKafkaConsumer.run(ctx);
     }
 
