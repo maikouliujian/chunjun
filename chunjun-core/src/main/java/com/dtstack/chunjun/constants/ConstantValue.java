@@ -44,6 +44,7 @@ public class ConstantValue {
     public static final String PROTOCOL_HTTP = "http://";
     public static final String PROTOCOL_HTTPS = "https://";
     public static final String PROTOCOL_HDFS = "hdfs://";
+    public static final String PROTOCOL_S3A = "s3a://";
     public static final String PROTOCOL_JDBC_MYSQL = "jdbc:mysql://";
 
     public static final String SYSTEM_PROPERTIES_KEY_OS = "os.name";
