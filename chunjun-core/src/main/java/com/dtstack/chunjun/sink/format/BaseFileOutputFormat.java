@@ -24,10 +24,10 @@ import com.dtstack.chunjun.enums.SizeUnitType;
 import com.dtstack.chunjun.sink.WriteMode;
 import com.dtstack.chunjun.throwable.WriteRecordException;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.table.data.RowData;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
