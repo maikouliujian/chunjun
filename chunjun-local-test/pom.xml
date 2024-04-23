@@ -284,6 +284,11 @@
 			<artifactId>chunjun-connector-s3</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.dtstack.chunjun</groupId>
+			<artifactId>chunjun-connector-s3a</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!--NoSql-->
 		<dependency>
