@@ -1,0 +1,102 @@
+{
+  "job": {
+    "content": [{
+      "reader": {
+        "name": "s3areader",
+        "parameter": {
+          "fileType": "parquet",
+          "path": "s3a://emr/dw.db/ods_mysql_db_relation_relation_ships_1h/2024-04-18/13",
+          "defaultFS": "s3a://emr",
+          "fieldDelimiter": "\u0001",
+          "encoding": "utf-8",
+          "column": [{
+            "name": "user_id",
+            "type": "string"
+          }, {
+            "name": "relation_userid",
+            "type": "string"
+          }, {
+            "name": "follow_status",
+            "type": "string"
+          }, {
+            "name": "followed_status",
+            "type": "string"
+          }, {
+            "name": "update_at",
+            "type": "bigint"
+          }, {
+            "name": "event",
+            "type": "string"
+          }],
+          "hadoopConfig": {
+            "fs.defaultFS": "s3a://emr",
+            "dfs.client.failover.proxy.provider.ns": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+            "hadoop.user.name": "dolphin",
+            "fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
+            "fs.hdfs.impl.disable.cache": "true"
+          }
+        }
+      },
+      "writer": {
+        "name": "mysqlwriter",
+        "parameter": {
+          "username": "db_rw",
+          "password": "**********",
+          "writeMode":"replace",
+//          "writeMode":"replace",
+          "column": [{
+            "name": "userid",
+            "type": "varchar"
+          }, {
+            "name": "relation_userid",
+            "type": "varchar"
+          }, {
+            "name": "follow_status",
+            "type": "tinyint"
+          }, {
+            "name": "followed_status",
+            "type": "tinyint"
+          }, {
+            "name": "update_at",
+            "type": "bigint"
+          }, {
+            "name": "event",
+            "type": "varchar"
+          }],
+          "connection": [{
+            "jdbcUrl": "jdbc:mysql://mysql.test-spatio-inc.com:3306/db_relation?useCursorFetch=true&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false",
+            "table": ["relation_ships_camel_test"]
+          }],
+          "preSql":[
+            "delete from relation_ships_camel_test"
+          ],
+//          "updateKey":{
+//            "key":[]
+//          }
+          "uniqueKey": ["userid","relation_userid"]
+        }
+      }
+    }],
+    "setting": {
+      "speed": {
+        "channel": 1,
+        "bytes": 104857600,
+        "readerChannel": 1,
+        "writerChannel": 1
+      },
+      "errorLimit": {
+        "record": 1,
+        "percentage": 100
+      },
+      "dirty": {
+        "path": "/tmp/dirty/flinkx",
+        "hadoopConfig": {}
+      },
+      "keyByPosition": -1,
+      "restore": {
+        "isStream": false,
+        "stream": false
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "column": [
+              {
+                "name": "sku_id",
+                "type": "string"
+              },
+              {
+                "name": "spu_id",
+                "type": "string"
+              },
+              {
+                "name": "asset_id",
+                "type": "string"
+              },
+              {
+                "name": "show_name",
+                "type": "string"
+              },
+              {
+                "name": "region",
+                "type": "string"
+              },
+              {
+                "name": "online_status",
+                "type": "bigint"
+              },
+              {
+                "name": "goods_type",
+                "type": "bigint"
+              },
+              {
+                "name": "price",
+                "type": "bigint"
+              },
+              {
+                "name": "sale_count",
+                "type": "bigint"
+              },
+              {
+                "name": "biz_type",
+                "type": "bigint"
+              },
+              {
+                "name": "asset_type",
+                "type": "bigint"
+              },
+              {
+                "name": "goods_id",
+                "type": "string"
+              }
+            ],
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:mysql://r.db-economy-data.mysql.prod-spatio-inc.com:3306/db_economy?useCursorFetch=true&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false"
+                ],
+                "table": [
+                  "sku"
+                ]
+              }
+            ],
+            "password": "*****************",
+            "splitPk": "",
+            "username": "db_data_ro",
+            "where": ""
+          }
+        },
+        "writer": {
+          "name": "s3awriter",
+          "parameter": {
+            "path": "s3a://emr/data/camel/datasync/db/ods_mysql_db_economy_sku_1d/${date, -1 day, yyyy-MM-dd}",
+            "defaultFS": "s3a://emr",
+            "column": [
+              {
+                "name": "sku_id",
+                "type": "string"
+              },
+              {
+                "name": "spu_id",
+                "type": "string"
+              },
+              {
+                "name": "asset_id",
+                "type": "string"
+              },
+              {
+                "name": "show_name",
+                "type": "string"
+              },
+              {
+                "name": "region",
+                "type": "string"
+              },
+              {
+                "name": "online_status",
+                "type": "bigint"
+              },
+              {
+                "name": "goods_type",
+                "type": "bigint"
+              },
+              {
+                "name": "price",
+                "type": "bigint"
+              },
+              {
+                "name": "sale_count",
+                "type": "bigint"
+              },
+              {
+                "name": "biz_type",
+                "type": "bigint"
+              },
+              {
+                "name": "asset_type",
+                "type": "bigint"
+              },
+              {
+                "name": "goods_id",
+                "type": "string"
+              }
+            ],
+            "fileType": "parquet",
+            "compress": "GZIP",
+            "maxFileSize": 335217728,
+            "nextCheckRows": 20000,
+            "fieldDelimiter": "\u0001",
+            "encoding": "utf-8",
+            "writeMode": "overwrite",
+            "hadoopConfig": {
+              "dfs.ha.namenodes.ha-nn-uri": "nn1,nn2,nn3",
+              "fs.defaultFS": "s3a://emr",
+              "dfs.namenode.rpc-address.ha-nn-uri.nn1": "ip1:8020",
+              "dfs.namenode.rpc-address.ha-nn-uri.nn2": "ip2:8020",
+              "dfs.namenode.rpc-address.ha-nn-uri.nn3": "ip3:8020",
+              "dfs.client.failover.proxy.provider.ns": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+              "dfs.nameservices": "ha-nn-uri",
+              "fs.hdfs.impl.disable.cache": "true",
+              "hadoop.user.name": "data",
+              "fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem"
+            }
+          }
+        }
+      }
+    ],
+    "speed": {
+      "bytes": 104857600,
+      "channel": 1,
+      "readerChannel": 1,
+      "writerChannel": 1
+    }
+  }
+}
