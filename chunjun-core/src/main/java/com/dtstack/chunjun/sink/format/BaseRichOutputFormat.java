@@ -120,12 +120,14 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
     protected transient ScheduledExecutorService scheduler;
     /** 定时提交数据服务返回结果 */
     protected transient ScheduledFuture scheduledFuture;
+    //todo 和batchSize配合使用，如果batchSize攒不够，那么可以按照flushIntervalMills定期刷数据！！！！！！
     /** 定时提交数据服务间隔时间，单位毫秒 */
     protected long flushIntervalMills;
     /** 任务公共配置 */
     protected ChunJunCommonConf config;
     /** BaseRichOutputFormat是否结束 */
     protected transient volatile boolean closed = false;
+    //todo 批量提交条数，攒一批提交！！！！！！
     /** 批量提交条数 */
     protected int batchSize = 1;
     /** 最新读取的数据 */
@@ -255,6 +257,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
 
         initStatisticsAccumulator();
         initRestoreInfo();
+        //todo 定期提交数据的设置，如果batchsize攒不够，则可以按照时间间隔提交
         initTimingSubmitTask();
         initRowSizeCalculator();
 
@@ -290,6 +293,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
                 size = 1;
             } else {
                 rows.add(rowData);
+                //todo 当rows的size大于batchSize时，开始批量写
                 if (rows.size() >= batchSize) {
                     // todo 批量写
                     writeRecordInternal();
