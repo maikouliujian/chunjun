@@ -60,6 +60,7 @@ public class EnvFactory {
             env = StreamExecutionEnvironment.getExecutionEnvironment(cfg);
         }
         env.getConfig().disableClosureCleaner();
+        //todo 设置全局变量！！！！！！
         env.getConfig().setGlobalJobParameters(cfg);
         return env;
     }

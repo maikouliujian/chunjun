@@ -145,6 +145,7 @@ public abstract class BaseRichInputFormat extends RichInputFormat<RowData, Input
         ExecutionConfig.GlobalJobParameters params =
                 context.getExecutionConfig().getGlobalJobParameters();
         DirtyConf dc = DirtyConfUtil.parseFromMap(params.toMap());
+        // todo 初始化dirtyManager，异常日志收集器
         this.dirtyManager = new DirtyManager(dc, this.context);
 
         if (inputSplit instanceof ErrorInputSplit) {

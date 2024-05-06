@@ -242,6 +242,7 @@ public abstract class BaseRichOutputFormat extends RichOutputFormat<RowData>
         ExecutionConfig.GlobalJobParameters params =
                 context.getExecutionConfig().getGlobalJobParameters();
         DirtyConf dc = DirtyConfUtil.parseFromMap(params.toMap());
+        //todo DirtyManager,异常日志收集器
         this.dirtyManager = new DirtyManager(dc, this.context);
 
         checkpointMode =
