@@ -51,6 +51,7 @@ public class S3aSourceFactory extends SourceFactory {
     public DataStream<RowData> createSource() {
         HdfsInputFormatBuilder builder = HdfsInputFormatBuilder.newBuild(hdfsConf.getFileType());
         builder.setHdfsConf(hdfsConf);
+        //todo 数据row转化器
         AbstractRowConverter rowConverter =
                 HdfsUtil.createRowConverter(
                         useAbstractBaseColumn,

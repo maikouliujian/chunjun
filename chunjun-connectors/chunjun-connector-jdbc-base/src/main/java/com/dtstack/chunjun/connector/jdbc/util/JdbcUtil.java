@@ -603,9 +603,10 @@ public class JdbcUtil {
         }
     }
 
+    //todo 修正jdbc字段位置，以用户填写的顺序为准，避免乱序！！！！！！
     private static Pair<List<String>, List<String>> checkAndModifyColumnWithMeta(
             String tableName,
-            List<FieldConf> column,
+            List<FieldConf> column,//todo 用户填写的列顺序
             List<String> metaColumnName,
             List<String> metaColumnType,
             String constantType) {
@@ -614,6 +615,7 @@ public class JdbcUtil {
         List<String> columnNameList = new ArrayList<>(column.size());
         List<String> columnTypeList = new ArrayList<>(column.size());
         int index = 0;
+        //todo 以用户填写的顺序为准
         for (FieldConf fieldConf : column) {
             if (StringUtils.isNotBlank(fieldConf.getValue())) {
                 fieldConf.setType(constantType);
@@ -628,6 +630,7 @@ public class JdbcUtil {
                         metaType = metaColumnType.get(i);
                         columnNameList.add(name);
                         columnTypeList.add(metaType);
+                        //todo 修改index和type
                         fieldConf.setIndex(index++);
                         fieldConf.setType(metaColumnType.get(i));
                         break;

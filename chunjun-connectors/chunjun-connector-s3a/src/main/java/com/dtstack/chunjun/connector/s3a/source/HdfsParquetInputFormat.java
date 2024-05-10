@@ -180,7 +180,7 @@ public class HdfsParquetInputFormat extends BaseHdfsInputFormat {
         }
         return false;
     }
-
+    //todo 重置index
     private void setMetaColumns() {
         if (fullColNames == null && currentLine != null) {
             fullColNames = new ArrayList<>();
