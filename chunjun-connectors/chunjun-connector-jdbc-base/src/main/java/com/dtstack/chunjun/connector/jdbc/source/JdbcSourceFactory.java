@@ -173,10 +173,13 @@ public abstract class JdbcSourceFactory extends SourceFactory {
 
     protected void initColumnInfo() {
         Connection conn = getConn();
+        // todo 获取表的元信息和字段类型
         Pair<List<String>, List<String>> tableMetaData = getTableMetaData(conn);
+        // todo 检查后的表的元信息和字段类型
         Pair<List<String>, List<String>> selectedColumnInfo =
                 JdbcUtil.buildColumnWithMeta(jdbcConf, tableMetaData, getConstantType());
         JdbcUtil.closeDbResources(null, null, conn, false);
+        // todo 筛选出需要同步的字段和类型！！！！！！
         columnNameList = selectedColumnInfo.getLeft();
         columnTypeList = selectedColumnInfo.getRight();
         this.fieldList = jdbcConf.getColumn();

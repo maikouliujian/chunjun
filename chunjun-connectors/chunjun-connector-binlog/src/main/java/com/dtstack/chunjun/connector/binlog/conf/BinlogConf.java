@@ -35,7 +35,8 @@ public class BinlogConf extends ChunJunCommonConf {
     public String password;
 
     public String jdbcUrl;
-
+    //todo binlog启动位置，用于断点续传：key有：journal-name、timestamp、position
+    //todo 如果journal-name为空，那么会选择timestamp
     public Map<String, Object> start;
 
     public String cat;
@@ -55,7 +56,41 @@ public class BinlogConf extends ChunJunCommonConf {
     public int bufferSize = 256;
 
     public int transactionSize = 1024;
+    //todo 是否将数据平铺
+    /***
+     * true：
+     *
+     {
+     "type": "update",
+     "schema": "test",
+     "table": "tb1",
+     "ts": "12312",
+     "before_id": "1",
+     "before_name": "a",
+     "after_id": "2",
+     "after_name": "b",
+     }
+     * false:
+     *
+     {
+     "message": {
+     "type": "update",
+     "schema": "test",
+     "table": "tb1",
+     "ts": "12312",
+     "ingestion": "12312",
+     "before": {
+     "id": "1",
+     "name": "a",
+     },
+     "after": {
+     "id": "2",
+     "name": "b",
+     }
+     }
+     }
 
+     */
     public boolean pavingData = true;
 
     public List<String> table;

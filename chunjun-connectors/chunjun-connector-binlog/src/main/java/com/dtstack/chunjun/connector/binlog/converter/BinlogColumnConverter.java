@@ -280,6 +280,7 @@ public class BinlogColumnConverter extends AbstractCDCRowConverter<BinlogEventRo
                 parseColumnList(converters, beforeList, beforeColumnList, beforeHeaderList, "");
                 parseColumnList(converters, afterList, afterColumnList, afterHeaderList, "");
             } else if (pavingData) {
+                //todo 压平数据
                 parseColumnList(
                         converters, beforeList, beforeColumnList, beforeHeaderList, BEFORE_);
                 parseColumnList(converters, afterList, afterColumnList, afterHeaderList, AFTER_);

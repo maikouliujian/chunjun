@@ -70,9 +70,11 @@ public class FieldConf implements Serializable {
         List<FieldConf> list;
         if (CollectionUtils.isNotEmpty(fieldList)) {
             list = new ArrayList<>(fieldList.size());
+            // todo 处理column信息
             if (fieldList.get(0) instanceof Map) {
                 for (int i = 0; i < fieldList.size(); i++) {
                     Map map = (Map) fieldList.get(i);
+                    // todo 设置列信息
                     list.add(getField(map, i));
                 }
             } else if (fieldList.get(0) instanceof String) {
@@ -114,7 +116,7 @@ public class FieldConf implements Serializable {
 
         Object type = map.get("type");
         field.setType(type != null ? String.valueOf(type) : null);
-
+        // todo 如果参数中有index，使用参数中的index，否则取默认
         Object colIndex = map.get("index");
         if (Objects.nonNull(colIndex)) {
             field.setIndex((Integer) colIndex);

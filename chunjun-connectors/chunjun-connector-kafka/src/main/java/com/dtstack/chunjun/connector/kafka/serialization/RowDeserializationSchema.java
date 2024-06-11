@@ -43,6 +43,8 @@ public class RowDeserializationSchema extends DynamicKafkaDeserializationSchema 
     /** kafka conf */
     private final KafkaConf kafkaConf;
 
+    private long timestamp;
+
     public RowDeserializationSchema(
             KafkaConf kafkaConf, AbstractRowConverter<String, Object, byte[], String> converter) {
         super(1, null, null, null, null, false, null, null, false);
@@ -65,10 +67,21 @@ public class RowDeserializationSchema extends DynamicKafkaDeserializationSchema 
     public void deserialize(ConsumerRecord<byte[], byte[]> record, Collector<RowData> collector) {
         try {
             beforeDeserialize(record);
+            timestamp = record.timestamp();
             collector.collect(
                     converter.toInternal(new String(record.value(), StandardCharsets.UTF_8)));
         } catch (Exception e) {
             dirtyManager.collect(new String(record.value(), StandardCharsets.UTF_8), e, null);
+        }
+    }
+
+    @Override
+    public boolean isEndOfStream(RowData nextElement) {
+        if (kafkaConf.isBatch()) {
+            System.out.println("timestamp---->" + timestamp);
+            return timestamp > 1714128840000L;
+        } else {
+            return false;
         }
     }
 }

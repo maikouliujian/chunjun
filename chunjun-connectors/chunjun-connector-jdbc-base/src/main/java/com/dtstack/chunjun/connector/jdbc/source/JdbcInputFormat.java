@@ -108,7 +108,7 @@ public class JdbcInputFormat extends BaseRichInputFormat {
         try {
             dbConn = getConnection();
             dbConn.setAutoCommit(false);
-
+            // todo 构建查询sql的逻辑
             querySQL = buildQuerySql(currentJdbcInputSplit);
             jdbcConf.setQuerySql(querySQL);
             executeQuery(currentJdbcInputSplit.getStartLocation());
@@ -458,7 +458,7 @@ public class JdbcInputFormat extends BaseRichInputFormat {
             whereList.add(jdbcConf.getWhere());
         }
         String querySql;
-
+        // todo 构建查询sql
         querySql = buildQuerySqlBySplit(jdbcInputSplit, whereList);
 
         if (!jdbcConf.isPolling()) {
@@ -578,6 +578,7 @@ public class JdbcInputFormat extends BaseRichInputFormat {
     }
 
     /** create querySql for inputSplit * */
+    // todo 构建查询sql的逻辑
     protected String buildQuerySqlBySplit(JdbcInputSplit jdbcInputSplit, List<String> whereList) {
         return SqlUtil.buildQuerySqlBySplit(
                 jdbcConf, jdbcDialect, whereList, columnNameList, jdbcInputSplit);

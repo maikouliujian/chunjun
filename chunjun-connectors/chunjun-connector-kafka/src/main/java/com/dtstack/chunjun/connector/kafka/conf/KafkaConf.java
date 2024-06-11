@@ -61,6 +61,8 @@ public class KafkaConf extends ChunJunCommonConf {
 
     private boolean split;
 
+    private boolean isBatch = false;
+
     public String getCodec() {
         return codec;
     }
@@ -179,10 +181,18 @@ public class KafkaConf extends ChunJunCommonConf {
         this.split = split;
     }
 
+    public boolean isBatch() {
+        return isBatch;
+    }
+
+    public void setBatch(boolean batch) {
+        isBatch = batch;
+    }
+
     @Override
     public String toString() {
         return "KafkaConf{"
-                + ", codec='"
+                + "codec='"
                 + codec
                 + '\''
                 + ", topic='"
@@ -202,12 +212,21 @@ public class KafkaConf extends ChunJunCommonConf {
                 + consumerSettings
                 + ", producerSettings="
                 + producerSettings
-                + ", dataCompelOrder="
-                + dataCompelOrder
                 + ", tableFields="
                 + tableFields
+                + ", dataCompelOrder="
+                + dataCompelOrder
                 + ", partitionAssignColumns="
                 + partitionAssignColumns
+                + ", deserialization='"
+                + deserialization
+                + '\''
+                + ", pavingData="
+                + pavingData
+                + ", split="
+                + split
+                + ", isBatch="
+                + isBatch
                 + '}';
     }
 }

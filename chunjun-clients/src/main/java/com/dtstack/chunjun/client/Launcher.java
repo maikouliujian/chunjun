@@ -135,7 +135,7 @@ public class Launcher {
         if (StringUtils.isNotEmpty(launcherOptions.getHadoopConfDir())) {
             return;
         }
-
+        //todo 首先从System.getenv中获取HADOOP_HOME，如果没有则从System.getProperty中获取
         String hadoopHome = getSystemProperty(KEY_HADOOP_HOME);
         if (StringUtils.isNotEmpty(hadoopHome)) {
             hadoopHome = hadoopHome.trim();

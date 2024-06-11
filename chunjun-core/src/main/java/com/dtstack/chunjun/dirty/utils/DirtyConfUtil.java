@@ -36,7 +36,7 @@ import java.util.Properties;
  * @author tiezhu@dtstack
  * @date 23/09/2021 Thursday
  */
-//todo DirtyConfUtil
+// todo DirtyConfUtil
 public class DirtyConfUtil {
 
     private static final String DEFAULT_TYPE = "default";
@@ -71,7 +71,7 @@ public class DirtyConfUtil {
 
         confMap.entrySet().stream()
                 .filter(
-                        //todo 配置中只取chunjun.dirty-data.开头的配置项
+                        // todo 配置中只取chunjun.dirty-data.开头的配置项
                         item ->
                                 item.getKey()
                                         .toLowerCase(Locale.ROOT)

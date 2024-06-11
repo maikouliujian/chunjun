@@ -69,6 +69,7 @@ public class KafkaSourceFactory extends SourceFactory {
         Properties props = new Properties();
         props.put("group.id", kafkaConf.getGroupId());
         props.putAll(kafkaConf.getConsumerSettings());
+        // todo 反序列化器
         DynamicKafkaDeserializationSchema deserializationSchema =
                 createKafkaDeserializationSchema(kafkaConf.getDeserialization());
         KafkaConsumerWrapper consumer =

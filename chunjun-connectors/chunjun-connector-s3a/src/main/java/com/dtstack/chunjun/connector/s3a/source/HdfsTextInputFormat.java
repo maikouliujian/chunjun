@@ -139,6 +139,7 @@ public class HdfsTextInputFormat extends BaseHdfsInputFormat {
                 for (int i = 0; i < fieldConfList.size(); i++) {
                     FieldConf fieldConf = fieldConfList.get(i);
                     Object value = null;
+                    // todo value的默认值不能是空字符串！！！！！！，不然会导致数据都为空
                     if (fieldConf.getValue() != null) {
                         value = fieldConf.getValue();
                     } else if (fieldConf.getIndex() != null

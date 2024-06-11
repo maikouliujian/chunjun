@@ -85,6 +85,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
 
         if (StringUtils.isNotEmpty(binlogConf.getCat()) || !binlogConf.isDdlSkip()) {
             if (StringUtils.isNotEmpty(binlogConf.getCat())) {
+                //todo binlog监听事件类型同步，比如update、delete、insert
                 categories =
                         Arrays.stream(
                                         binlogConf
@@ -255,6 +256,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
             checkBinlogFile(startPosition.getJournalName());
         } else if (MapUtils.isNotEmpty(binlogConf.getStart())) {
             startPosition = new EntryPosition();
+            //todo 设置初始化
             String journalName = (String) binlogConf.getStart().get("journal-name");
             checkBinlogFile(journalName);
 

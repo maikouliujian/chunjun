@@ -373,7 +373,7 @@ public class JdbcOutputFormat extends BaseRichOutputFormat {
             throw new IllegalArgumentException("Unknown write mode:" + jdbcConf.getMode());
         }
     }
-    //todo jdbc写支持三种模式：INSERT、REPLACE、UPDATE
+    // todo jdbc写支持三种模式：INSERT、REPLACE、UPDATE
     protected String prepareTemplates() {
         String singleSql;
         if (EWriteMode.INSERT.name().equalsIgnoreCase(jdbcConf.getMode())) {

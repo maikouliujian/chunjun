@@ -48,7 +48,12 @@ public class LocalTest {
         String userDir = System.getProperty("user.dir");
 
         //String jobPath = userDir + "/config/kafka2hive.json";
-        String jobPath = userDir + "/chunjun-examples/json/test/s3a_mysql_test.json";
+        //String jobPath = userDir + "/chunjun-examples/json/test/kafka_stream.json";
+        //String jobPath = userDir + "/chunjun-examples/json/test/s3a_mysql_test1.json";
+        //String jobPath = userDir + "/chunjun-examples/json/test/s3a_ck1.json";
+        //String jobPath = userDir + "/chunjun-examples/json/test/mysql2hive_no_fields.json";
+        //String jobPath = userDir + "/chunjun-examples/json/test/mysql_s3a_test3.json";
+        String jobPath = userDir + "/chunjun-examples/json/test/kafka2ck.json";
         String chunjunDistDir = userDir + "/start-chunjun-dist";
         String s = "";
 
@@ -67,17 +72,17 @@ public class LocalTest {
             argsList.add(URLEncoder.encode(content, StandardCharsets.UTF_8.name()));
             // argsList.add("-flinkConfDir");
             // argsList.add("/opt/dtstack/flink-1.12.2/conf/");
-            // argsList.add("-confProp");
-            //// 脏数据相关配置信息
-            // StringBuilder stringBuilder = new StringBuilder();
-            // stringBuilder
-            //        .append("{")
-            //        .append("\"start-chunjun.dirty-data.output-type\":\"print\"")
-            //        .append(", ")
-            //        .append("\"start-chunjun.dirty-data.max-rows\":\"1000\"")
-            //        .append(", ")
-            //        .append("\"start-chunjun.dirty-data.max-collect-failed-rows\":\"100\"")
-            //        .append(", ")
+//             argsList.add("-confProp");
+//            // 脏数据相关配置信息
+//             StringBuilder stringBuilder = new StringBuilder();
+//             stringBuilder
+//                    .append("{")
+//                    .append("\"chunjun.dirty-data.output-type\":\"print\"")
+//                    .append(", ")
+//                    .append("\"chunjun.dirty-data.max-rows\":\"0\"")
+//                    .append(", ")
+//                    .append("\"chunjun.dirty-data.max-collect-failed-rows\":\"0\"")
+//                    .append("}");
             //
             // .append("\"start-chunjun.dirty-data.jdbc.url\":\"jdbc:mysql://localhost:3306/tiezhu\"")
             //        .append(", ")
@@ -93,7 +98,7 @@ public class LocalTest {
             //        .append(", ")
             //        .append("\"start-chunjun.dirty-data.log.print-interval\":\"10\"")
             //        .append("}");
-            // argsList.add(stringBuilder.toString());
+            //argsList.add(stringBuilder.toString());
             argsList.add(GsonUtil.GSON.toJson(confProperties));
         } else if (StringUtils.endsWith(jobPath, "sql")) {
             argsList.add("-jobType");

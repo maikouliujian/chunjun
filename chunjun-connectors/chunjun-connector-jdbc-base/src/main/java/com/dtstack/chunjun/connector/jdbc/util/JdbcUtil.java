@@ -193,6 +193,7 @@ public class JdbcUtil {
             Statement statement = dbConn.createStatement();
             statement.setQueryTimeout(30);
             ResultSet resultSet = dbConn.createStatement().executeQuery(querySql);
+            // todo 获取表的元信息
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             List<String> fullColumnList = new ArrayList<>(resultSetMetaData.getColumnCount());
             List<String> fullColumnTypeList = new ArrayList<>(resultSetMetaData.getColumnCount());
@@ -573,7 +574,9 @@ public class JdbcUtil {
             JdbcConf jdbcConf,
             Pair<List<String>, List<String>> tableMetaData,
             String constantType) {
+        // todo 获取表的元信息列
         List<String> metaColumnName = tableMetaData.getLeft();
+        // todo 获取表的元信息列类型
         List<String> metaColumnType = tableMetaData.getRight();
 
         List<FieldConf> column = jdbcConf.getColumn();
@@ -594,6 +597,7 @@ public class JdbcUtil {
             jdbcConf.setColumn(metaColumn);
             return Pair.of(columnNameList, columnTypeList);
         } else {
+            // todo 检查列和修改列类型
             return checkAndModifyColumnWithMeta(
                     jdbcConf.getTable(),
                     jdbcConf.getColumn(),
@@ -603,20 +607,22 @@ public class JdbcUtil {
         }
     }
 
-    //todo 修正jdbc字段位置，以用户填写的顺序为准，避免乱序！！！！！！
+    // todo 修正jdbc字段位置，以用户填写的顺序为准，避免乱序！！！！！！
     private static Pair<List<String>, List<String>> checkAndModifyColumnWithMeta(
             String tableName,
-            List<FieldConf> column,//todo 用户填写的列顺序
+            List<FieldConf> column, // todo 用户填写的列顺序
             List<String> metaColumnName,
             List<String> metaColumnType,
             String constantType) {
         // check columnName and modify columnType
+        // todo 检查列，修改列类型
         int metaColumnSize = metaColumnName.size();
         List<String> columnNameList = new ArrayList<>(column.size());
         List<String> columnTypeList = new ArrayList<>(column.size());
         int index = 0;
-        //todo 以用户填写的顺序为准
+        // todo 以用户填写的顺序为准
         for (FieldConf fieldConf : column) {
+            // todo 值不为""
             if (StringUtils.isNotBlank(fieldConf.getValue())) {
                 fieldConf.setType(constantType);
                 fieldConf.setIndex(-1);
@@ -630,7 +636,7 @@ public class JdbcUtil {
                         metaType = metaColumnType.get(i);
                         columnNameList.add(name);
                         columnTypeList.add(metaType);
-                        //todo 修改index和type
+                        // todo 修改index和type
                         fieldConf.setIndex(index++);
                         fieldConf.setType(metaColumnType.get(i));
                         break;

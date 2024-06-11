@@ -204,9 +204,9 @@ public class MysqlDirtyDataCollector extends DirtyDataCollector {
         checkNotNull(userName, "jdbc.username can not be null.");
         checkNotNull(url, "jdbc.url can not be null.");
         checkNotNull(table, "jdbc.table can not be null.");
-        //todo batchSize
+        // todo batchSize
         this.batchSize = Long.parseLong(String.valueOf(batchSize));
-        //todo batchIntervalMill
+        // todo batchIntervalMill
         this.batchIntervalMill = Long.parseLong(String.valueOf(batchInterval));
         this.username = String.valueOf(userName);
         this.password = String.valueOf(password);

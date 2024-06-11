@@ -355,7 +355,7 @@ public interface JdbcDialect extends Serializable {
             String tableName,
             String customSql,
             String[] selectFields,
-            String[] selectCustomFields,
+            String[] selectCustomFields, // todo select的字段list
             String where) {
         String selectExpressions =
                 Arrays.stream(selectFields)

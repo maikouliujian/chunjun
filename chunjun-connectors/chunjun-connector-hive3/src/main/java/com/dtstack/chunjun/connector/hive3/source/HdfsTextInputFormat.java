@@ -107,7 +107,7 @@ public class HdfsTextInputFormat extends BaseHdfsInputFormat {
     public InputFormat<LongWritable, Text> createMapredInputFormat() {
         return new TextInputFormat();
     }
-    //todo textfile取数逻辑
+    // todo textfile取数逻辑
     @Override
     protected RowData nextRecordInternal(RowData rowData) throws ReadRecordException {
         try {
@@ -132,12 +132,12 @@ public class HdfsTextInputFormat extends BaseHdfsInputFormat {
                     FieldConf fieldConf = fieldConfList.get(i);
 
                     Object value = null;
-                    //todo 如果有value，优先从value取
+                    // todo 如果有value，优先从value取
                     if (fieldConf.getValue() != null) {
                         value = fieldConf.getValue();
                     } else if (fieldConf.getIndex() != null
                             && fieldConf.getIndex() < fields.length) {
-                        //todo 否则，通过自定义index，从fields中取
+                        // todo 否则，通过自定义index，从fields中取
                         String strVal = fields[fieldConf.getIndex()];
                         if (!Hive3Util.NULL_VALUE.equals(strVal)) {
                             value = strVal;
