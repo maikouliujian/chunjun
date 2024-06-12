@@ -636,7 +636,7 @@ public class JdbcUtil {
                         metaType = metaColumnType.get(i);
                         columnNameList.add(name);
                         columnTypeList.add(metaType);
-                        // todo 修改index和type
+                        // todo 修改index和type,以meta中的index和type为准
                         fieldConf.setIndex(index++);
                         fieldConf.setType(metaColumnType.get(i));
                         break;
