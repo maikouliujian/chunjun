@@ -97,6 +97,7 @@ public class S3aDynamicTableFactory implements DynamicTableSourceFactory, Dynami
         HdfsConf hdfsConf = getHdfsConf(config);
         List<String> partitionKeys = context.getCatalogTable().getPartitionKeys();
         hdfsConf.setParallelism(config.get(SourceOptions.SCAN_PARALLELISM));
+        //todo 设置配置：context.getCatalogTable().getOptions() 就是 flink sql中的with参数
         hdfsConf.setHadoopConfig(
                 HdfsOptions.getHadoopConfig(context.getCatalogTable().getOptions()));
 

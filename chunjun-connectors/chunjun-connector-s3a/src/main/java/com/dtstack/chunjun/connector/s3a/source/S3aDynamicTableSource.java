@@ -95,7 +95,7 @@ public class S3aDynamicTableSource implements ScanTableSource {
         builder.setRowConverter(rowConverter);
         return ParallelSourceFunctionProvider.of(
                 new DtInputFormatSourceFunction<>(builder.finish(), typeInformation),
-                false,
+                true,
                 hdfsConf.getParallelism());
     }
 
