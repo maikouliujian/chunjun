@@ -161,6 +161,7 @@ public abstract class JdbcDynamicTableFactory
         conf.setJdbcUrl(readableConfig.get(URL));
         conf.setTable(Arrays.asList(readableConfig.get(TABLE_NAME)));
         conf.setSchema(readableConfig.get(SCHEMA));
+        //todo SINK_ALL_REPLACE
         conf.setAllReplace(readableConfig.get(SINK_ALL_REPLACE));
 
         jdbcConf.setUsername(readableConfig.get(USERNAME));
