@@ -29,7 +29,7 @@ import java.io.FilenameFilter;
  * @create: 2021/05/31
  */
 public class PluginInfoUtil {
-    //todo 应用程序主类
+    //todo 应用程序主类【com.dtstack.chunjun.Main】
     private static final String MAIN_CLASS = "com.dtstack.chunjun.Main";
     private static final String CORE_JAR_NAME_PREFIX = "chunjun";
 
