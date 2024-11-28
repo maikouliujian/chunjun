@@ -85,7 +85,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
 
         if (StringUtils.isNotEmpty(binlogConf.getCat()) || !binlogConf.isDdlSkip()) {
             if (StringUtils.isNotEmpty(binlogConf.getCat())) {
-                //todo binlog监听事件类型同步，比如update、delete、insert
+                // todo binlog监听事件类型同步，比如update、delete、insert
                 categories =
                         Arrays.stream(
                                         binlogConf
@@ -166,13 +166,15 @@ public class BinlogInputFormat extends BaseRichInputFormat {
         if (binlogConf.isInitialTableStructure()) {
             binlogEventSink.initialTableStructData(tableFilters);
         }
+        // todo 监听数据库变更
         controller.start();
     }
 
     protected MysqlEventParser getController(
             String username, String filter, BinlogEventSink binlogEventSink) {
         MysqlEventParser controller = new MysqlEventParser();
-        controller.setConnectionCharset(Charset.forName(binlogConf.getConnectionCharset()));
+        controller.setConnectionCharset(
+                String.valueOf(Charset.forName(binlogConf.getConnectionCharset())));
         controller.setSlaveId(binlogConf.getSlaveId());
         controller.setDetectingEnable(binlogConf.isDetectingEnable());
         controller.setDetectingSQL(binlogConf.getDetectingSQL());
@@ -184,6 +186,9 @@ public class BinlogInputFormat extends BaseRichInputFormat {
                         BinlogUtil.getDataBaseByUrl(binlogConf.getJdbcUrl())));
         controller.setEnableTsdb(binlogConf.isEnableTsdb());
         controller.setDestination("example");
+        controller.setTsdbJdbcUrl("example");
+        controller.setTsdbJdbcUserName("example");
+        controller.setTsdbJdbcPassword("example");
         controller.setParallel(binlogConf.isParallel());
         controller.setParallelBufferSize(binlogConf.getBufferSize());
         controller.setParallelThreadSize(binlogConf.getParallelThreadSize());
@@ -191,7 +196,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
 
         controller.setAlarmHandler(new BinlogAlarmHandler());
         controller.setTransactionSize(binlogConf.getTransactionSize());
-
+        // todo eventparser中持有binlogEventSink
         controller.setEventSink(binlogEventSink);
 
         controller.setLogPositionManager(new BinlogPositionManager(this));
@@ -199,6 +204,10 @@ public class BinlogInputFormat extends BaseRichInputFormat {
         HeartBeatController heartBeatController = new HeartBeatController();
         heartBeatController.setBinlogEventSink(binlogEventSink);
         controller.setHaController(heartBeatController);
+        controller.setUseDruidDdlFilter(true);
+        controller.setFilterQueryDdl(true);
+        controller.setFilterQueryDcl(true);
+        controller.setFilterTableError(true);
         EntryPosition startPosition = findStartPosition();
         if (startPosition != null) {
             controller.setMasterPosition(startPosition);
@@ -223,6 +232,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
     @Override
     protected RowData nextRecordInternal(RowData row) {
         if (binlogEventSink != null) {
+            // todo 从队列中获取数据
             return binlogEventSink.takeRowDataFromQueue();
         }
         LOG.warn("binlog park start");
@@ -256,7 +266,7 @@ public class BinlogInputFormat extends BaseRichInputFormat {
             checkBinlogFile(startPosition.getJournalName());
         } else if (MapUtils.isNotEmpty(binlogConf.getStart())) {
             startPosition = new EntryPosition();
-            //todo 设置初始化
+            // todo 设置初始化
             String journalName = (String) binlogConf.getStart().get("journal-name");
             checkBinlogFile(journalName);
 

@@ -390,10 +390,15 @@
 			<artifactId>chunjun-ddl-mysql</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<version>8.0.30</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.30</version>
+			<version>5.1.46</version>
 		</dependency>
 
 

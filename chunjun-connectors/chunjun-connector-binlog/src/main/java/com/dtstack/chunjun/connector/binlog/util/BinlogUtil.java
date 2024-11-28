@@ -46,7 +46,8 @@ import java.util.Set;
  * @author tudou
  */
 public class BinlogUtil {
-    public static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    // public static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    public static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     public static final int RETRY_TIMES = 3;
     public static final int SLEEP_TIME = 2000;
     private static final Logger LOG = LoggerFactory.getLogger(BinlogUtil.class);

@@ -53,7 +53,7 @@ public class YarnConfLoader {
 
                 if (xmlFileList != null) {
                     for (File xmlFile : xmlFileList) {
-                        //todo 添加hadoop相关配置
+                        // todo 添加hadoop相关配置
                         yarnConf.addResource(xmlFile.toURI().toURL());
                     }
                 }

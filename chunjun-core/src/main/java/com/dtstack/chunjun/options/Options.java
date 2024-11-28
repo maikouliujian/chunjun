@@ -66,15 +66,11 @@ public class Options {
 
     @OptionRequired(description = "ext flinkLibJar")
     private String flinkLibDir;
-    //todo flink的启动参数配置可以通过confProp来配置
-    /***
-     * {
-     *   "yarn.application.name": "chunjun-af-test",
-     *   "yarn.application.queue": "passivestate",
-     *   "jobmanager.memory.process.size": "1g", //todo 单位g 或者 gb都可
-     *   "taskmanager.memory.process.size": "1g",
-     *   "taskmanager.numberOfTaskSlots": 1
-     * }
+    // todo flink的启动参数配置可以通过confProp来配置
+    /**
+     * * { "yarn.application.name": "chunjun-af-test", "yarn.application.queue": "passivestate",
+     * "jobmanager.memory.process.size": "1g", //todo 单位g 或者 gb都可 "taskmanager.memory.process.size":
+     * "1g", "taskmanager.numberOfTaskSlots": 1 }
      */
     @OptionRequired(description = "env properties")
     private String confProp = "{}";

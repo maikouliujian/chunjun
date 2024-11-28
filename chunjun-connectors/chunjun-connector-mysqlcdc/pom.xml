@@ -42,16 +42,21 @@
 			<artifactId>chunjun-connector-jdbc-base</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.46</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<version>5.1.46</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.alibaba.ververica</groupId>
 			<artifactId>flink-connector-mysql-cdc</artifactId>
 			<version>${flinkcdc.version}</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.ververica</groupId>-->
+<!--			<artifactId>flink-connector-mysql-cdc</artifactId>-->
+<!--			<version>${flinkcdc.version}</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>

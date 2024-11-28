@@ -99,10 +99,10 @@ public class JdbcOutputFormat extends BaseRichOutputFormat {
             // 默认关闭事务自动提交，手动控制事务
             dbConn.setAutoCommit(jdbcConf.isAutoCommit());
             if (!EWriteMode.INSERT.name().equalsIgnoreCase(jdbcConf.getMode())) {
-                //todo jdbc的主键，先从配置中取
+                // todo jdbc的主键，先从配置中取
                 List<String> updateKey = jdbcConf.getUniqueKey();
                 if (CollectionUtils.isEmpty(updateKey)) {
-                    //todo 如果配置中主键为空，则从schema中取主键index
+                    // todo 如果配置中主键为空，则从schema中取主键index
                     List<String> tableIndex =
                             JdbcUtil.getTableUniqueIndex(
                                     jdbcConf.getSchema(), jdbcConf.getTable(), dbConn);
@@ -127,7 +127,7 @@ public class JdbcOutputFormat extends BaseRichOutputFormat {
             // restoration
             statementWrapper = new RestoreWrapperProxy(dbConn, jdbcDialect, false);
         } else {
-            //todo 如果主键为空则只插入
+            // todo 如果主键为空则只插入
             if (useAbstractColumn || CollectionUtils.isEmpty(jdbcConf.getUniqueKey())) {
                 // sync or sql appendOnly
                 FieldNamedPreparedStatement fieldNamedPreparedStatement =
@@ -369,7 +369,7 @@ public class JdbcOutputFormat extends BaseRichOutputFormat {
                         jdbcConf.getTable(),
                         columnNameList.toArray(new String[0]),
                         jdbcConf.getUniqueKey().toArray(new String[0]),
-                        //todo isAllReplace
+                        // todo isAllReplace
                         jdbcConf.isAllReplace());
         if (upsertStatement.isPresent()) {
             return upsertStatement.get();

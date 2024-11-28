@@ -80,7 +80,7 @@ public class MysqlDialect implements JdbcDialect {
             String[] uniqueKeyFields,
             boolean allReplace) {
         String updateClause;
-        //todo allReplace是否全部更新，true：全部更新；false：只更新非null的字段
+        // todo allReplace是否全部更新，true：全部更新；false：只更新非null的字段
         if (allReplace) {
             updateClause =
                     Arrays.stream(fieldNames)

@@ -84,7 +84,7 @@ public class RowSerializationSchema extends DynamicKafkaSerializationSchema {
             byte[] valueSerialized = valueConverter.toExternal(element, null);
             return new ProducerRecord<>(
                     this.topic,
-                    //todo 抽取分区器
+                    // todo 抽取分区器
                     extractPartition(element, keySerialized, null),
                     null,
                     valueSerialized);

@@ -53,7 +53,7 @@ public class LocalTest {
         //String jobPath = userDir + "/chunjun-examples/json/test/s3a_ck1.json";
         //String jobPath = userDir + "/chunjun-examples/json/test/mysql2hive_no_fields.json";
         //String jobPath = userDir + "/chunjun-examples/json/test/mysql_s3a_test3.json";
-        String jobPath = userDir + "/chunjun-examples/json/test/kafka2ck.json";
+        String jobPath = userDir + "/chunjun-examples/json/test/binlog2stream.json";
         String chunjunDistDir = userDir + "/start-chunjun-dist";
         String s = "";
 
@@ -70,6 +70,8 @@ public class LocalTest {
             argsList.add("sync");
             argsList.add("-job");
             argsList.add(URLEncoder.encode(content, StandardCharsets.UTF_8.name()));
+            //argsList.add("-confProp");
+            //argsList.add("-confProp {\"taskmanager.heap.size\": \"3048m\"}");
             // argsList.add("-flinkConfDir");
             // argsList.add("/opt/dtstack/flink-1.12.2/conf/");
 //             argsList.add("-confProp");

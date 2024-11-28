@@ -259,7 +259,7 @@ public class JdbcUtil {
      */
     public static List<String> getTablePrimaryKey(
             String schema, String tableName, Connection dbConn) throws SQLException {
-        //todo 获取主键
+        // todo 获取主键
         ResultSet rs = dbConn.getMetaData().getPrimaryKeys(null, schema, tableName);
         List<String> indexList = new LinkedList<>();
         while (rs.next()) {

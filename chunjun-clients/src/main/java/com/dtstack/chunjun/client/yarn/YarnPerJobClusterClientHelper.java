@@ -90,7 +90,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         Configuration flinkConfig = jobDeployer.getEffectiveConfiguration();
 
         SecurityUtils.install(new SecurityConfiguration(flinkConfig));
-        //todo 配置任务启动参数
+        // todo 配置任务启动参数
         ClusterSpecification clusterSpecification = createClusterSpecification(jobDeployer);
         // todo 创建YarnClusterDescriptor，并添加config和libs
         YarnClusterDescriptor descriptor =
@@ -186,7 +186,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         int slotsPerTaskManager = 1;
 
         if (conProp != null) {
-            //todo jobmanager
+            // todo jobmanager
             if (conProp.containsKey(JobManagerOptions.TOTAL_PROCESS_MEMORY.key())) {
                 jobManagerMemoryMb =
                         Math.max(
@@ -198,7 +198,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
                                         .getMebiBytes());
             }
             if (conProp.containsKey(TaskManagerOptions.TOTAL_PROCESS_MEMORY.key())) {
-                //todo taskmanager
+                // todo taskmanager
                 taskManagerMemoryMb =
                         Math.max(
                                 MIN_TM_MEMORY,
@@ -209,7 +209,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
                                         .getMebiBytes());
             }
             if (conProp.containsKey(NUM_TASK_SLOTS.key())) {
-                //todo 每一个taskmanager的slot数
+                // todo 每一个taskmanager的slot数
                 slotsPerTaskManager = ValueUtil.getInt(conProp.get(NUM_TASK_SLOTS.key()));
             }
         }
@@ -235,7 +235,7 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
         File jarFile = new File(coreJarPath);
         clusterSpecification.setConfiguration(launcherOptions.loadFlinkConfiguration());
         clusterSpecification.setClasspaths(Collections.emptyList());
-        //todo 设置程序mainclass ===> com.dtstack.chunjun.Main
+        // todo 设置程序mainclass ===> com.dtstack.chunjun.Main
         clusterSpecification.setEntryPointClass(PluginInfoUtil.getMainClass());
         clusterSpecification.setJarFile(jarFile);
 

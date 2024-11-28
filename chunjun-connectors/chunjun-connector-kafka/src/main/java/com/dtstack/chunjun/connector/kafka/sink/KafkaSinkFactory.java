@@ -82,7 +82,7 @@ public class KafkaSinkFactory extends SinkFactory {
         }
 
         RowSerializationSchema rowSerializationSchema;
-        //todo 如果kafka设置了分区列getPartitionAssignColumns，那么kafka的tablefields必须设置
+        // todo 如果kafka设置了分区列getPartitionAssignColumns，那么kafka的tablefields必须设置
         if (!CollectionUtil.isNullOrEmpty(kafkaConf.getPartitionAssignColumns())) {
             Preconditions.checkState(
                     !CollectionUtil.isNullOrEmpty(kafkaConf.getTableFields()),
